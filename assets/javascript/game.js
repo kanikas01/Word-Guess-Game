@@ -5,14 +5,42 @@ var currentWordPara = document.getElementById("current-word");
 var guessesRemainingPara = document.getElementById("guesses-remaining");
 var lettersGuessedPara = document.getElementById("letters-guessed");
 
-// Additional variables
+// Declare and initialize additional variables
 const maxGuesses = 10;
 var isSolved = false;
 var guessesRemaining = maxGuesses;
 var wins = 0;
 
-// Array to hold our cat breeds
-var catBreeds = ["Abyssinian", "American Bobtail", "American Curl", "American Shorthair", "American Wirehair", "Balinese", "Bengal Cats", "Birman", "Bombay", "British Shorthair", "Burmese", "Burmilla", "Chartreux", "Chinese Li Hua", "Colorpoint Shorthair", "Cornish Rex", "Cymric", "Devon Rex", "Egyptian Mau", "European Burmese", "Exotic", "Havana Brown", "Himalayan", "Japanese Bobtail", "Javanese", "Korat", "LaPerm", "Maine Coon", "Manx", "Nebelung", "Norwegian Forest", "Ocicat", "Oriental", "Persian", "Pixie-Bob", "Ragamuffin", "Ragdoll Cats", "Russian Blue", "Savannah", "Scottish Fold", "Selkirk Rex", "Siamese Cat", "Siberian", "Singapura", "Snowshoe", "Somali", "Sphynx", "Tonkinese", "Turkish Angora", "Turkish Van"];
+// Create array to hold our cat breeds
+var catBreeds = [
+                  "Abyssinian",
+                  "Balinese",
+                  "Bengal",
+                  "Birman",
+                  "Bobtail", 
+                  "Bombay",
+                  "Burmese",
+                  "Burmilla",
+                  "Chartreux",
+                  "Cymric",
+                  "Himalayan",
+                  "Javanese",
+                  "Korat",
+                  "LaPerm", 
+                  "Manx",
+                  "Nebelung",
+                  "Ocicat",
+                  "Persian",
+                  "Ragamuffin",
+                  "Savannah",
+                  "Siamese",
+                  "Siberian",
+                  "Singapura",
+                  "Snowshoe",
+                  "Somali",
+                  "Sphynx",
+                  "Tonkinese"
+                ];
 
 //---------- FUNCTION DEFINITIONS ----------//
 
@@ -74,7 +102,6 @@ document.onkeyup = function (event) {
   guessesRemainingPara.innerHTML = --guessesRemaining;
   var result = testGuess();
   isSolved = checkProgress();
-  console.log(result);
 
   if (isSolved == true) {
     //Increment and display 'wins'
@@ -83,5 +110,8 @@ document.onkeyup = function (event) {
   }
   else if ((isSolved == false) && (guessesRemaining == -1)) {
     initialize();
+  }
+  else {
+    return;
   }
 }
