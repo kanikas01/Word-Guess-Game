@@ -10,10 +10,14 @@ const maxGuesses = 10;
 var isSolved = false;
 var guessesRemaining = maxGuesses;
 var wins = 0;
+var currentWordIndex;
+var currentWord = '';
+var hiddenWord = '';
+var lettersGuessed = [];
+
 
 // Create array to hold our cat breeds
-var catBreeds = [
-                  "Abyssinian",
+var catBreeds = [ "Abyssinian",
                   "Balinese",
                   "Bengal",
                   "Birman",
@@ -39,14 +43,13 @@ var catBreeds = [
                   "Snowshoe",
                   "Somali",
                   "Sphynx",
-                  "Tonkinese"
-                ];
+                  "Tonkinese" ];
 
 //---------- FUNCTION DEFINITIONS ----------//
 
 // Select random array element (for getting random cat breed)
 function getRandomArrayElement(myArray) {
-  return myArray[Math.floor(Math.random() * myArray.length)];
+  return myArray[Math.floor(Math.random() * myArray.length)].toLowerCase();
 }
 
 // Initialize variables for next round
@@ -60,32 +63,46 @@ function initialize() {
   lettersGuessedPara.innerHTML = '';
 
   // Choose a new cat
-  breed = getRandomArrayElement(catBreeds);
-  console.log(breed); // for testing
+  currentWord = getRandomArrayElement(catBreeds);
+  console.log(currentWord); // for testing
   
   // Show unknown word as series of underscores
-  currentWordPara.innerHTML = showBlankWord(breed);
+  hiddenWord = getBlankWord(currentWord)
+  currentWordPara.innerHTML = displayBlankWord(hiddenWord);
 }
 
 // Show hidden word as underscores
-function showBlankWord(word) {
-  var hiddenWord = '';
+function getBlankWord(word) {
+  var blankWord = '';
   for (var i = 0; i < word.length; i++) {
-    // Omit underscore for blank spaces
-    if (word[i] == ' ') {
-      hiddenWord += '&nbsp;&nbsp';
-    }
-    else {
-      hiddenWord += "_ ";
-    }
+    blankWord += "_";
   }
-  return hiddenWord.trim();
+  return blankWord;
 }
 
-function testGuess(guess) {
-  // WRITE ME
-  return;
+  // Create version of the blank word that is more legible
+function displayBlankWord(word) {
+  var blankWord = '';
+  for (var i = 0; i < word.length; i++) {
+    blankWord += word[i] + ' ';
+  }
+  return blankWord.trim();
 }
+
+// Update blank word with each correct guess
+function updateBlankWord(word, blankWord, letter) { ;
+  var newBlankWord = '';
+  for (var i = 0; i < word.length; i++) {
+    if (word[i] === letter) {
+     newBlankWord += letter;
+    }
+    else {
+      newBlankWord += blankWord[i];
+    }
+  }
+  return newBlankWord;
+}
+
 
 function checkProgress() {
   // WRITE ME
@@ -97,10 +114,28 @@ function checkProgress() {
 initialize();
 
 document.onkeyup = function (event) {
-  var guess = event.key.toUpperCase();
-  lettersGuessedPara.innerHTML += guess + ' ';
-  guessesRemainingPara.innerHTML = --guessesRemaining;
-  var result = testGuess();
+  var guess = event.key.toLowerCase();
+
+  // Check to see if letter has already been guessed
+  if (lettersGuessed.includes(guess)) {
+    alert("You've already guessed that letter.");
+    return;
+  }
+
+  if (currentWord.includes(guess)) {
+
+    hiddenWord = updateBlankWord(currentWord, hiddenWord, guess);
+    lettersGuessed.push(guess);
+    currentWordPara.innerHTML = displayBlankWord(hiddenWord);
+  }
+
+  else {
+    lettersGuessed.push(guess);
+    lettersGuessedPara.innerHTML += guess + ', ';
+    guessesRemainingPara.innerHTML = --guessesRemaining;
+  }
+  
+
   isSolved = checkProgress();
 
   if (isSolved == true) {
@@ -114,4 +149,5 @@ document.onkeyup = function (event) {
   else {
     return;
   }
+  return;
 }
