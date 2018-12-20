@@ -33,6 +33,7 @@ var catBreeds = [ "Abyssinian",
                   "LaPerm", 
                   "Manx",
                   "Nebelung",
+                  "Nyan",
                   "Ocicat",
                   "Persian",
                   "Ragamuffin",
@@ -57,6 +58,7 @@ function initialize() {
   // Reset all values
   guessesRemaining = maxGuesses;
   isSolved = false;
+  lettersGuessed = [];
 
   // Reset DOM display
   guessesRemainingPara.innerHTML = guessesRemaining;
@@ -104,9 +106,8 @@ function updateBlankWord(word, blankWord, letter) { ;
 }
 
 
-function checkProgress() {
-  // WRITE ME
-  return false;
+function checkProgress(word) {
+  return !(word.includes('_'));
 }
 
 //---------- END FUNCTION DEFINITIONS ----------//
@@ -134,16 +135,16 @@ document.onkeyup = function (event) {
     lettersGuessedPara.innerHTML += guess + ', ';
     guessesRemainingPara.innerHTML = --guessesRemaining;
   }
-  
 
-  isSolved = checkProgress();
+  isSolved = checkProgress(hiddenWord);
 
-  if (isSolved == true) {
+  if (isSolved) {
     //Increment and display 'wins'
     winsPara.innerHTML = ++wins;
     initialize();
   }
   else if ((isSolved == false) && (guessesRemaining == -1)) {
+    alert("You lose!");
     initialize();
   }
   else {
