@@ -50,7 +50,7 @@ var catBreeds = [ "Abyssinian",
 
 // Select random array element (for getting random cat breed)
 function getRandomArrayElement(myArray) {
-  return myArray[Math.floor(Math.random() * myArray.length)].toLowerCase();
+  return myArray[Math.floor(Math.random() * myArray.length)].toUpperCase();
 }
 
 // Initialize variables for next round
@@ -115,7 +115,7 @@ function checkProgress(word) {
 initialize();
 
 document.onkeyup = function (event) {
-  var guess = event.key.toLowerCase();
+  var guess = event.key.toUpperCase();
 
   // Check to see if letter has already been guessed
   if (lettersGuessed.includes(guess)) {
@@ -133,7 +133,7 @@ document.onkeyup = function (event) {
   } 
   else {
     lettersGuessed.push(guess);
-    lettersGuessedPara.innerHTML += guess + ', ';
+    lettersGuessedPara.innerHTML += guess + ' ';
     guessesRemainingPara.innerHTML = --guessesRemaining;
   }
 
@@ -145,8 +145,9 @@ document.onkeyup = function (event) {
     winsPara.innerHTML = ++wins;
     initialize();
   }
-  else if ((isSolved == false) && (guessesRemaining == -1)) {
+  else if ((isSolved == false) && (guessesRemaining <= 0)) {
     // Game lost state - display message and restart
+    guessesRemainingPara.innerHTML = --guessesRemaining;
     alert("You lose!");
     initialize();
   }
