@@ -13,8 +13,9 @@ var wins = 0;
 var currentWordIndex;
 var currentWord = '';
 var hiddenWord = '';
-var lettersGuessed = [];
+var lettersGuessed = [' ']; // Space character is given in case of multi-word answers
 
+var catBreedsTest = ["Devon Rex", "Cheshire cat"];  // For testing multi-word answers
 
 // Create array to hold our cat breeds
 var catBreeds = [ "Abyssinian",
@@ -77,7 +78,12 @@ function initialize() {
 function getBlankWord(word) {
   var blankWord = '';
   for (var i = 0; i < word.length; i++) {
-    blankWord += "_";
+    if (word[i] === ' ') {
+      blankWord += ' ';
+    }
+    else {
+      blankWord += "_";
+    }
   }
   return blankWord;
 }
@@ -86,7 +92,12 @@ function getBlankWord(word) {
 function displayBlankWord(word) {
   var blankWord = '';
   for (var i = 0; i < word.length; i++) {
-    blankWord += word[i] + ' ';
+    if (word[i] === ' ') {
+      blankWord += '&nbsp;&nbsp;&nbsp;'
+    }
+    else { 
+      blankWord += word[i] + ' ';
+    }
   }
   return blankWord.trim();
 }
