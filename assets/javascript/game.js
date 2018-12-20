@@ -82,7 +82,7 @@ function getBlankWord(word) {
   return blankWord;
 }
 
-  // Create version of the blank word that is more legible
+// Create version of the blank word that is more legible
 function displayBlankWord(word) {
   var blankWord = '';
   for (var i = 0; i < word.length; i++) {
@@ -105,7 +105,7 @@ function updateBlankWord(word, blankWord, letter) { ;
   return newBlankWord;
 }
 
-
+// Check whether the word has been guessed
 function checkProgress(word) {
   return !(word.includes('_'));
 }
@@ -122,28 +122,31 @@ document.onkeyup = function (event) {
     alert("You've already guessed that letter.");
     return;
   }
-
+  
+  // Check if guessed letter is in the word
+  // If so, fill in blanks. If not, add letter to 
+  // guessed letters and decrease remaining guesses
   if (currentWord.includes(guess)) {
-
     hiddenWord = updateBlankWord(currentWord, hiddenWord, guess);
     lettersGuessed.push(guess);
     currentWordPara.innerHTML = displayBlankWord(hiddenWord);
-  }
-
+  } 
   else {
     lettersGuessed.push(guess);
     lettersGuessedPara.innerHTML += guess + ', ';
     guessesRemainingPara.innerHTML = --guessesRemaining;
   }
 
+  // Check to see if the puzzle has been solved
   isSolved = checkProgress(hiddenWord);
 
   if (isSolved) {
-    //Increment and display 'wins'
+    // Game won state - increment and display 'wins', restart game
     winsPara.innerHTML = ++wins;
     initialize();
   }
   else if ((isSolved == false) && (guessesRemaining == -1)) {
+    // Game lost state - display message and restart
     alert("You lose!");
     initialize();
   }
