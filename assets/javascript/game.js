@@ -188,8 +188,8 @@ document.onkeyup = function (event) {
   else if ((isSolved == false) && (guessesRemaining <= 0)) {
     // Game lost state - display message and restart
     h1.innerHTML = "You lose!";
-    gamePrompt.innerHTML = "Starting new game in 3... 2... 1...";
-    setTimeout(initialize, 2000);
+    gamePrompt.innerHTML = `The correct answer was: ${currentWord}<br>Starting new game in 3... 2... 1...`; 
+    setTimeout(initialize, 3000);
   }
   else {
     return;
