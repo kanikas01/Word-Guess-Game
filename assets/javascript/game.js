@@ -153,14 +153,14 @@ document.onkeyup = function (event) {
 
   if (isSolved) {
     // Game won state - increment and display 'wins', restart game
+    hiddenWord = updateBlankWord(currentWord, hiddenWord, guess);
+    currentWordPara.innerHTML = displayBlankWord(hiddenWord);
     winsPara.innerHTML = ++wins;
-    initialize();
+    setTimeout(initialize, 2000);
   }
   else if ((isSolved == false) && (guessesRemaining <= 0)) {
     // Game lost state - display message and restart
-    guessesRemainingPara.innerHTML = --guessesRemaining;
-    alert("You lose!");
-    initialize();
+    setTimeout(initialize, 2000);
   }
   else {
     return;
