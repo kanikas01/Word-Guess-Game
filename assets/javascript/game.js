@@ -76,7 +76,7 @@ function getRandomArrayElement(myArray) {
 // Initialize variables for next round
 function initialize() {
   // Reset all values
-  h1.innerHTML = "Name that cat breed";
+  h1.innerHTML = "Guess the cat breed";
   gamePrompt.innerHTML = "Press any key to get started!";
   guessesRemaining = maxGuesses;
   isSolved = false;
