@@ -164,6 +164,7 @@ document.onkeyup = function (event) {
   if (currentWord.includes(guess)) {
     hiddenWord = updateBlankWord(currentWord, hiddenWord, guess);
     lettersGuessed.push(guess);
+    lettersGuessedPara.innerHTML += guess + ' ';
     currentWordPara.innerHTML = displayBlankWord(hiddenWord);
   } 
   else {
