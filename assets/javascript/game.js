@@ -12,6 +12,7 @@ const maxGuesses = 10;
 var isSolved = false;
 var guessesRemaining = maxGuesses;
 var wins = 0;
+winsPara.innerHTML = wins;
 var currentWordIndex;
 var currentWord = '';
 var hiddenWord = '';
