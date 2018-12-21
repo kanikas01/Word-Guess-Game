@@ -4,6 +4,8 @@ var winsPara = document.getElementById("wins");
 var currentWordPara = document.getElementById("current-word");
 var guessesRemainingPara = document.getElementById("guesses-remaining");
 var lettersGuessedPara = document.getElementById("letters-guessed");
+var h1 = document.getElementById("h1");
+var gamePrompt = document.getElementById("game-prompt");
 
 // Declare and initialize additional variables
 const maxGuesses = 10;
@@ -74,6 +76,8 @@ function getRandomArrayElement(myArray) {
 // Initialize variables for next round
 function initialize() {
   // Reset all values
+  h1.innerHTML = "Name that cat breed";
+  gamePrompt.innerHTML = "Press any key to get started!";
   guessesRemaining = maxGuesses;
   isSolved = false;
   lettersGuessed = [];
@@ -165,14 +169,16 @@ document.onkeyup = function (event) {
   else {
     lettersGuessed.push(guess);
     lettersGuessedPara.innerHTML += guess + ' ';
-    guessesRemainingPara.innerHTML = --guessesRemaining;
+    guessesRemainingPara.innerHTML = isSolved ? guessesRemaining : --guessesRemaining;
   }
 
   // Check to see if the puzzle has been solved
   isSolved = checkProgress(hiddenWord);
 
   if (isSolved) {
-    // Game won state - increment and display 'wins', restart game
+    // Game won state - increment'wins', display message and restart
+    h1.innerHTML = "You win!";
+    gamePrompt.innerHTML = "Starting new game in 3... 2... 1...";
     hiddenWord = updateBlankWord(currentWord, hiddenWord, guess);
     currentWordPara.innerHTML = displayBlankWord(hiddenWord);
     winsPara.innerHTML = ++wins;
@@ -180,6 +186,8 @@ document.onkeyup = function (event) {
   }
   else if ((isSolved == false) && (guessesRemaining <= 0)) {
     // Game lost state - display message and restart
+    h1.innerHTML = "You lose!";
+    gamePrompt.innerHTML = "Starting new game in 3... 2... 1...";
     setTimeout(initialize, 2000);
   }
   else {
