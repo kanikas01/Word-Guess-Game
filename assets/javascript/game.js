@@ -91,12 +91,15 @@ function initialize() {
   currentWordPara.innerHTML = displayBlankWord(hiddenWord);
 }
 
-// Show hidden word as underscores
+// Show hidden word as underscores (except space and hyphen chars)
 function getBlankWord(word) {
   var blankWord = '';
   for (var i = 0; i < word.length; i++) {
     if (word[i] === ' ') {
       blankWord += ' ';
+    }
+    else if (word[i] === '-') {
+      blankWord += '-';
     }
     else {
       blankWord += "_";
