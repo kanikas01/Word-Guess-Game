@@ -15,37 +15,54 @@ var currentWord = '';
 var hiddenWord = '';
 var lettersGuessed = [' ']; // Space character is given in case of multi-word answers
 
-var catBreedsTest = ["Devon Rex", "Cheshire cat"];  // For testing multi-word answers
-
 // Create array to hold our cat breeds
 var catBreeds = [ "Abyssinian",
+                  "American Bobtail",
+                  "American Curl",
+                  "American Shorthair",
+                  "American Wirehair",
                   "Balinese",
                   "Bengal",
                   "Birman",
-                  "Bobtail", 
                   "Bombay",
+                  "British Shorthair",
                   "Burmese",
                   "Burmilla",
                   "Chartreux",
+                  "Chinese Li Hua",
+                  "Colorpoint Shorthair",
+                  "Cornish Rex",
                   "Cymric",
+                  "Devon Rex",
+                  "Egyptian Mau",
+                  "European Burmese",
+                  "Havana Brown",
                   "Himalayan",
+                  "Japanese Bobtail",
                   "Javanese",
                   "Korat",
-                  "LaPerm", 
+                  "LaPerm",
+                  "Maine Coon",
                   "Manx",
                   "Nebelung",
-                  "Nyan",
+                  "Norwegian Forest",
                   "Ocicat",
                   "Persian",
                   "Ragamuffin",
+                  "Ragdoll",
+                  "Russian Blue",
                   "Savannah",
+                  "Scottish Fold",
+                  "Selkirk Rex",
                   "Siamese",
                   "Siberian",
                   "Singapura",
                   "Snowshoe",
                   "Somali",
                   "Sphynx",
-                  "Tonkinese" ];
+                  "Tonkinese",
+                  "Turkish Angora",
+                  "Turkish Van" ];
 
 //---------- FUNCTION DEFINITIONS ----------//
 
