@@ -76,7 +76,7 @@ var catBreeds = ["Abyssinian",
 //---------- FUNCTION DEFINITIONS ----------//
 
 // Select random array element (for getting random cat breed)
-// Uses recursion to hopefully prevent returning the same value twice in a row
+// Uses recursion to prevent returning the same value twice in a row
 // Takes an array and currentWord as arguments
 function getRandomArrayElement(myArray, currentWord) {
   var newWord = myArray[Math.floor(Math.random() * myArray.length)].toUpperCase();
