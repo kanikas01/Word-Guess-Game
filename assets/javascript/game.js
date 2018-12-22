@@ -8,7 +8,7 @@ var h1 = document.getElementById("h1");
 var gamePrompt = document.getElementById("game-prompt");
 
 // Declare and initialize additional variables
-const maxGuesses = 10;
+const maxGuesses = 7;
 var isSolved = false;
 var guessesRemaining = maxGuesses;
 var wins = 0;
