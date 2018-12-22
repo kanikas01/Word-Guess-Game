@@ -203,7 +203,6 @@ document.onkeyup = function (event) {
 
   // Check to see if letter has already been guessed
   if (lettersGuessed.includes(guess)) {
-    alert("You've already guessed that letter.");
     return;
   }
 
