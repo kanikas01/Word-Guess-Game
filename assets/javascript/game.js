@@ -12,9 +12,10 @@ const maxGuesses = 10;
 var isSolved = false;
 var guessesRemaining = maxGuesses;
 var wins = 0;
-var currentWordIndex;
 var currentWord = '';
 var hiddenWord = '';
+var meow = new Audio('assets/sounds/meow.mp3');
+var angryMeow = new Audio('assets/sounds/angry-meow.mp3');
 var lettersGuessed = [' ']; // Space character is given in case of multi-word answers
 
 // Create array to hold our cat breeds
@@ -178,6 +179,7 @@ document.onkeyup = function (event) {
 
   if (isSolved) {
     // Game won state - increment'wins', display message and restart
+    meow.play();
     h1.innerHTML = "You win!";
     gamePrompt.innerHTML = "Starting new game in 3... 2... 1...";
     hiddenWord = updateBlankWord(currentWord, hiddenWord, guess);
@@ -187,6 +189,7 @@ document.onkeyup = function (event) {
   }
   else if ((isSolved == false) && (guessesRemaining <= 0)) {
     // Game lost state - display message and restart
+    angryMeow.play();
     h1.innerHTML = "You lose!";
     gamePrompt.innerHTML = `The correct answer was: ${currentWord}<br>Starting new game in 3... 2... 1...`; 
     setTimeout(initialize, 3000);
