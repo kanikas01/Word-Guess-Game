@@ -177,7 +177,7 @@ function displayResults (outcome, word) {
     angryMeow.play();
     h1.innerHTML = "YOU LOSE";
     gamePrompt.innerHTML = 'Better luck next time!';
-    h2Result.innerHTML = `The correct answer was:<br>${currentWord}`;
+    h2Result.innerHTML = `The correct answer was:<br>${word}`;
     resultPara.innerHTML = "Starting new game in 3... 2... 1...";
     mainContainer.style.display = 'none';
     result.style.display = 'block';
