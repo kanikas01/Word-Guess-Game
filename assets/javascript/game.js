@@ -18,7 +18,7 @@ var guessesRemaining = maxGuesses;
 var wins = 0;
 var currentWord = '';
 var hiddenWord = '';
-var meow = new Audio('assets/sounds/meow.mp3');
+var happyMeow = new Audio('assets/sounds/meow.mp3');
 var angryMeow = new Audio('assets/sounds/angry-meow.mp3');
 var letterChoices = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 var lettersGuessed = [' ']; // Space character is given in case of multi-word answers
@@ -85,7 +85,7 @@ function initialize() {
   mainContainer.style.display = 'block';
   result.style.display = 'none';
   h1.innerHTML = "Guess the cat breed";
-  gamePrompt.innerHTML = "Press any key to get started!";
+  gamePrompt.innerHTML = "Type any letter to get started!";
   guessesRemaining = maxGuesses;
   isSolved = false;
   lettersGuessed = [];
@@ -154,6 +154,27 @@ function checkProgress(word) {
   return !(word.includes('_'));
 }
 
+function displayResults (outcome, word) {
+  if (outcome) {
+    happyMeow.play();
+    h1.innerHTML = "YOU WIN";
+    gamePrompt.innerHTML = 'Congratulations!';
+    h2Result.innerHTML = `You guessed ${word}!`;
+    resultPara.innerHTML = "Starting new game in 3... 2... 1...";
+    mainContainer.style.display = 'none';
+    result.style.display = 'block';
+  }
+  else {
+    angryMeow.play();
+    h1.innerHTML = "YOU LOSE";
+    gamePrompt.innerHTML = 'Better luck next time!';
+    h2Result.innerHTML = `The correct answer was:<br>${currentWord}`;
+    resultPara.innerHTML = "Starting new game in 3... 2... 1...";
+    mainContainer.style.display = 'none';
+    result.style.display = 'block';
+  }
+}
+
 //---------- END FUNCTION DEFINITIONS ----------//
 
 initialize();
@@ -197,27 +218,13 @@ document.onkeyup = function (event) {
 
   if (isSolved) {
     // Game won state - increment'wins', display message and restart
-    meow.play();
-    h1.innerHTML = "YOU WIN";
-    gamePrompt.innerHTML = 'Congratulations!';
-    h2Result.innerHTML = `Well done! You guessed ${currentWord}!`;
-    resultPara.innerHTML = "Starting new game in 3... 2... 1...";
-    mainContainer.style.display = 'none';
-    result.style.display = 'block';
-    hiddenWord = updateBlankWord(currentWord, hiddenWord, guess);
-    currentWordPara.innerHTML = displayBlankWord(hiddenWord);
+    displayResults(true, currentWord);
     winsPara.innerHTML = ++wins;
     setTimeout(initialize, 4000);
   }
   else if ((isSolved == false) && (guessesRemaining <= 0)) {
     // Game lost state - display message and restart
-    angryMeow.play();
-    h1.innerHTML = "YOU LOSE";
-    gamePrompt.innerHTML = 'Better luck next time!';
-    h2Result.innerHTML = `The correct answer was: ${currentWord}`;
-    resultPara.innerHTML = "Starting new game in 3... 2... 1...";
-    mainContainer.style.display = 'none';
-    result.style.display = 'block';
+    displayResults(false, currentWord);
     setTimeout(initialize, 4000);
   }
   else {
