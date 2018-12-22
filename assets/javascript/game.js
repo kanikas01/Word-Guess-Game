@@ -185,14 +185,14 @@ document.onkeyup = function (event) {
     hiddenWord = updateBlankWord(currentWord, hiddenWord, guess);
     currentWordPara.innerHTML = displayBlankWord(hiddenWord);
     winsPara.innerHTML = ++wins;
-    setTimeout(initialize, 4000);
+    setTimeout(initialize, 5000);
   }
   else if ((isSolved == false) && (guessesRemaining <= 0)) {
     // Game lost state - display message and restart
     angryMeow.play();
     h1.innerHTML = "You lose!";
     gamePrompt.innerHTML = `The correct answer was: ${currentWord}<br>Starting new game in 3... 2... 1...`; 
-    setTimeout(initialize, 4000);
+    setTimeout(initialize, 5000);
   }
   else {
     return;
