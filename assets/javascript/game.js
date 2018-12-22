@@ -153,6 +153,11 @@ initialize();
 document.onkeyup = function (event) {
   var guess = event.key.toUpperCase();
 
+  // Prevent keystrokes from registering if game is over
+  if ((isSolved) || (guessesRemaining == 0)) {
+    return;
+  }
+
   // Check to see if letter has already been guessed
   if (lettersGuessed.includes(guess)) {
     alert("You've already guessed that letter.");
@@ -185,14 +190,14 @@ document.onkeyup = function (event) {
     hiddenWord = updateBlankWord(currentWord, hiddenWord, guess);
     currentWordPara.innerHTML = displayBlankWord(hiddenWord);
     winsPara.innerHTML = ++wins;
-    setTimeout(initialize, 5000);
+    setTimeout(initialize, 4000);
   }
   else if ((isSolved == false) && (guessesRemaining <= 0)) {
     // Game lost state - display message and restart
     angryMeow.play();
     h1.innerHTML = "You lose!";
     gamePrompt.innerHTML = `The correct answer was: ${currentWord}<br>Starting new game in 3... 2... 1...`; 
-    setTimeout(initialize, 5000);
+    setTimeout(initialize, 4000);
   }
   else {
     return;
