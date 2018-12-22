@@ -1,5 +1,9 @@
 
-// Assign variables to each important paragraph tag
+// Assign variables to each important html tag
+var mainContainer = document.getElementById("main-container");
+var resultDiv = document.getElementById("result");
+var h2Result = document.getElementById("h2-result");
+var resultPara = document.getElementById("p-result");
 var winsPara = document.getElementById("wins");
 var currentWordPara = document.getElementById("current-word");
 var guessesRemainingPara = document.getElementById("guesses-remaining");
@@ -16,57 +20,57 @@ var currentWord = '';
 var hiddenWord = '';
 var meow = new Audio('assets/sounds/meow.mp3');
 var angryMeow = new Audio('assets/sounds/angry-meow.mp3');
-var letterChoices ='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+var letterChoices = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 var lettersGuessed = [' ']; // Space character is given in case of multi-word answers
 
 // Create array to hold our cat breeds
-var catBreeds = [ "Abyssinian",
-                  "American Bobtail",
-                  "American Curl",
-                  "American Shorthair",
-                  "American Wirehair",
-                  "Balinese",
-                  "Bengal",
-                  "Birman",
-                  "Bombay",
-                  "British Shorthair",
-                  "Burmese",
-                  "Burmilla",
-                  "Chartreux",
-                  "Chinese Li Hua",
-                  "Colorpoint Shorthair",
-                  "Cornish Rex",
-                  "Cymric",
-                  "Devon Rex",
-                  "Egyptian Mau",
-                  "European Burmese",
-                  "Havana Brown",
-                  "Himalayan",
-                  "Japanese Bobtail",
-                  "Javanese",
-                  "Korat",
-                  "LaPerm",
-                  "Maine Coon",
-                  "Manx",
-                  "Nebelung",
-                  "Norwegian Forest",
-                  "Ocicat",
-                  "Persian",
-                  "Ragamuffin",
-                  "Ragdoll",
-                  "Russian Blue",
-                  "Savannah",
-                  "Scottish Fold",
-                  "Selkirk Rex",
-                  "Siamese",
-                  "Siberian",
-                  "Singapura",
-                  "Snowshoe",
-                  "Somali",
-                  "Sphynx",
-                  "Tonkinese",
-                  "Turkish Angora",
-                  "Turkish Van" ];
+var catBreeds = ["Abyssinian",
+  "American Bobtail",
+  "American Curl",
+  "American Shorthair",
+  "American Wirehair",
+  "Balinese",
+  "Bengal",
+  "Birman",
+  "Bombay",
+  "British Shorthair",
+  "Burmese",
+  "Burmilla",
+  "Chartreux",
+  "Chinese Li Hua",
+  "Colorpoint Shorthair",
+  "Cornish Rex",
+  "Cymric",
+  "Devon Rex",
+  "Egyptian Mau",
+  "European Burmese",
+  "Havana Brown",
+  "Himalayan",
+  "Japanese Bobtail",
+  "Javanese",
+  "Korat",
+  "LaPerm",
+  "Maine Coon",
+  "Manx",
+  "Nebelung",
+  "Norwegian Forest",
+  "Ocicat",
+  "Persian",
+  "Ragamuffin",
+  "Ragdoll",
+  "Russian Blue",
+  "Savannah",
+  "Scottish Fold",
+  "Selkirk Rex",
+  "Siamese",
+  "Siberian",
+  "Singapura",
+  "Snowshoe",
+  "Somali",
+  "Sphynx",
+  "Tonkinese",
+  "Turkish Angora",
+  "Turkish Van"];
 
 //---------- FUNCTION DEFINITIONS ----------//
 
@@ -78,6 +82,8 @@ function getRandomArrayElement(myArray) {
 // Initialize variables for next round
 function initialize() {
   // Reset all values
+  mainContainer.style.display = 'block';
+  result.style.display = 'none';
   h1.innerHTML = "Guess the cat breed";
   gamePrompt.innerHTML = "Press any key to get started!";
   guessesRemaining = maxGuesses;
@@ -91,7 +97,7 @@ function initialize() {
   // Choose a new cat
   currentWord = getRandomArrayElement(catBreeds);
   console.log(currentWord); // for testing
-  
+
   // Show unknown word as series of underscores
   hiddenWord = getBlankWord(currentWord)
   currentWordPara.innerHTML = displayBlankWord(hiddenWord);
@@ -121,7 +127,7 @@ function displayBlankWord(word) {
     if (word[i] === ' ') {
       blankWord += '&nbsp;&nbsp;&nbsp;'
     }
-    else { 
+    else {
       blankWord += word[i] + ' ';
     }
   }
@@ -129,11 +135,12 @@ function displayBlankWord(word) {
 }
 
 // Update blank word with each correct guess
-function updateBlankWord(word, blankWord, letter) { ;
+function updateBlankWord(word, blankWord, letter) {
+  ;
   var newBlankWord = '';
   for (var i = 0; i < word.length; i++) {
     if (word[i] === letter) {
-     newBlankWord += letter;
+      newBlankWord += letter;
     }
     else {
       newBlankWord += blankWord[i];
@@ -160,7 +167,7 @@ document.onkeyup = function (event) {
   }
 
   // Ignore input if not a letter
-  if ( !(letterChoices.includes(guess)) ) {
+  if (!(letterChoices.includes(guess))) {
     return;
   }
 
@@ -178,7 +185,7 @@ document.onkeyup = function (event) {
     lettersGuessed.push(guess);
     lettersGuessedPara.innerHTML += guess + ' ';
     currentWordPara.innerHTML = displayBlankWord(hiddenWord);
-  } 
+  }
   else {
     lettersGuessed.push(guess);
     lettersGuessedPara.innerHTML += guess + ' ';
@@ -191,8 +198,12 @@ document.onkeyup = function (event) {
   if (isSolved) {
     // Game won state - increment'wins', display message and restart
     meow.play();
-    h1.innerHTML = "You win!";
-    gamePrompt.innerHTML = "Starting new game in 3... 2... 1...";
+    h1.innerHTML = "YOU WIN";
+    gamePrompt.innerHTML = 'Congratulations!';
+    h2Result.innerHTML = `Well done! You guessed ${currentWord}!`;
+    resultPara.innerHTML = "Starting new game in 3... 2... 1...";
+    mainContainer.style.display = 'none';
+    result.style.display = 'block';
     hiddenWord = updateBlankWord(currentWord, hiddenWord, guess);
     currentWordPara.innerHTML = displayBlankWord(hiddenWord);
     winsPara.innerHTML = ++wins;
@@ -201,8 +212,12 @@ document.onkeyup = function (event) {
   else if ((isSolved == false) && (guessesRemaining <= 0)) {
     // Game lost state - display message and restart
     angryMeow.play();
-    h1.innerHTML = "You lose!";
-    gamePrompt.innerHTML = `The correct answer was: ${currentWord}<br>Starting new game in 3... 2... 1...`; 
+    h1.innerHTML = "YOU LOSE";
+    gamePrompt.innerHTML = 'Better luck next time!';
+    h2Result.innerHTML = `The correct answer was: ${currentWord}`;
+    resultPara.innerHTML = "Starting new game in 3... 2... 1...";
+    mainContainer.style.display = 'none';
+    result.style.display = 'block';
     setTimeout(initialize, 4000);
   }
   else {
