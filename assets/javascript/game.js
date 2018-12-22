@@ -75,9 +75,16 @@ var catBreeds = ["Abyssinian",
 //---------- FUNCTION DEFINITIONS ----------//
 
 // Select random array element (for getting random cat breed)
-// Takes an array argument
-function getRandomArrayElement(myArray) {
-  return myArray[Math.floor(Math.random() * myArray.length)].toUpperCase();
+// Uses recursion to prevent returning the same value twice in a row
+// Takes an array and currentWord as arguments
+function getRandomArrayElement(myArray, currentWord) {
+  var newWord = myArray[Math.floor(Math.random() * myArray.length)].toUpperCase();
+  if (newWord == currentWord) {
+    return getRandomArrayElement(myArray, currentWord);
+  }
+  else {
+    return newWord;
+  }
 }
 
 // Initialize variables for next round
@@ -96,7 +103,7 @@ function initialize() {
   lettersGuessedPara.innerHTML = '';
 
   // Choose a new cat
-  currentWord = getRandomArrayElement(catBreeds);
+  currentWord = getRandomArrayElement(catBreeds, currentWord);
   console.log(currentWord); // for testing
 
   // Show unknown word as series of underscores
