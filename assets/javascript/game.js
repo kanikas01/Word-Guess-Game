@@ -16,6 +16,7 @@ var currentWord = '';
 var hiddenWord = '';
 var meow = new Audio('assets/sounds/meow.mp3');
 var angryMeow = new Audio('assets/sounds/angry-meow.mp3');
+var letterChoices ='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 var lettersGuessed = [' ']; // Space character is given in case of multi-word answers
 
 // Create array to hold our cat breeds
@@ -158,12 +159,17 @@ document.onkeyup = function (event) {
     return;
   }
 
+  // Ignore input if not a letter
+  if ( !(letterChoices.includes(guess)) ) {
+    return;
+  }
+
   // Check to see if letter has already been guessed
   if (lettersGuessed.includes(guess)) {
     alert("You've already guessed that letter.");
     return;
   }
-  
+
   // Check if guessed letter is in the word
   // If so, fill in blanks. If not, add letter to 
   // guessed letters and decrease remaining guesses
