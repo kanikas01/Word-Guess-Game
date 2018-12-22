@@ -1,5 +1,9 @@
 
-// Assign variables to each important paragraph tag
+// Assign variables to each important html tag
+var mainContainer = document.getElementById("main-container");
+var resultDiv = document.getElementById("result");
+var h2Result = document.getElementById("h2-result");
+var resultPara = document.getElementById("p-result");
 var winsPara = document.getElementById("wins");
 var currentWordPara = document.getElementById("current-word");
 var guessesRemainingPara = document.getElementById("guesses-remaining");
@@ -78,6 +82,8 @@ function getRandomArrayElement(myArray) {
 // Initialize variables for next round
 function initialize() {
   // Reset all values
+  mainContainer.style.display = 'block';
+  result.style.display = 'none';
   h1.innerHTML = "Guess the cat breed";
   gamePrompt.innerHTML = "Press any key to get started!";
   guessesRemaining = maxGuesses;
@@ -191,8 +197,12 @@ document.onkeyup = function (event) {
   if (isSolved) {
     // Game won state - increment'wins', display message and restart
     meow.play();
-    h1.innerHTML = "You win!";
-    gamePrompt.innerHTML = "Starting new game in 3... 2... 1...";
+    h1.innerHTML = "YOU WIN";
+    gamePrompt.innerHTML = 'Congratulations!';
+    h2Result.innerHTML = `Well done! You guessed ${currentWord}!`;
+    resultPara.innerHTML = "Starting new game in 3... 2... 1...";
+    mainContainer.style.display = 'none';
+    result.style.display = 'block';
     hiddenWord = updateBlankWord(currentWord, hiddenWord, guess);
     currentWordPara.innerHTML = displayBlankWord(hiddenWord);
     winsPara.innerHTML = ++wins;
@@ -201,8 +211,12 @@ document.onkeyup = function (event) {
   else if ((isSolved == false) && (guessesRemaining <= 0)) {
     // Game lost state - display message and restart
     angryMeow.play();
-    h1.innerHTML = "You lose!";
-    gamePrompt.innerHTML = `The correct answer was: ${currentWord}<br>Starting new game in 3... 2... 1...`; 
+    h1.innerHTML = "YOU LOSE";
+    gamePrompt.innerHTML = 'Better luck next time!';
+    h2Result.innerHTML = `The correct answer was: ${currentWord}`;
+    resultPara.innerHTML = "Starting new game in 3... 2... 1...";
+    mainContainer.style.display = 'none';
+    result.style.display = 'block';
     setTimeout(initialize, 4000);
   }
   else {
