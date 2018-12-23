@@ -177,6 +177,11 @@ function countdown() {
     resultPara.innerHTML = `Starting next round in: ${i}`;
   }
 
+  // Hide main container and show results div
+  mainContainer.style.display = 'none';
+  result.style.display = 'block';
+  
+  // Simulate countdown
   setTimeout(displayCountdown, 1000, 3);
   setTimeout(displayCountdown, 2000, 2);
   setTimeout(displayCountdown, 3000, 1);
@@ -191,16 +196,12 @@ function displayResults (outcome, word) {
     h1.innerHTML = "YOU WIN";
     gamePrompt.innerHTML = 'Congratulations!';
     h2Result.innerHTML = `You guessed ${word}!`;
-    mainContainer.style.display = 'none';
-    result.style.display = 'block';
   }
   else {
     angryMeow.play();
     h1.innerHTML = "YOU LOSE";
     gamePrompt.innerHTML = 'Better luck next time!';
     h2Result.innerHTML = `The correct answer was:<br>${word}`;
-    mainContainer.style.display = 'none';
-    result.style.display = 'block';
   }
   // Start countdown display to next round
   countdown();
