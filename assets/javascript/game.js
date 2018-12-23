@@ -185,6 +185,8 @@ function countdown() {
   setTimeout(displayCountdown, 1000, 3);
   setTimeout(displayCountdown, 2000, 2);
   setTimeout(displayCountdown, 3000, 1);
+  // Reset game for next round
+  setTimeout(initialize, 4000);
 }
 
 // Displays results depending on win or loss
@@ -250,12 +252,10 @@ document.onkeyup = function (event) {
     // Game won state - increment'wins', display message and restart
     displayResults(true, currentWord);
     winsPara.innerHTML = ++wins;
-    setTimeout(initialize, 4000);
   }
   else if ((isSolved == false) && (guessesRemaining <= 0)) {
     // Game lost state - display message and restart
     displayResults(false, currentWord);
-    setTimeout(initialize, 4000);
   }
   else {
     return;
