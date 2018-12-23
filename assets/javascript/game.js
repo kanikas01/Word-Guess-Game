@@ -102,6 +102,7 @@ function initialize() {
   // Reset DOM display
   guessesRemainingPara.innerHTML = guessesRemaining;
   lettersGuessedPara.innerHTML = '';
+  resultPara.innerHTML = '';
 
   // Choose a new cat
   currentWord = getRandomArrayElement(catBreeds, currentWord);
@@ -168,6 +169,19 @@ function updateBlankWord(word, blankWord, letter) {
 function checkProgress(word) {
   return !(word.includes('_'));
 }
+
+// Counts down to the start of the next round 
+function countdown() {
+
+  function displayCountdown(i) {
+    resultPara.innerHTML = `Starting next round in: ${i}`;
+  }
+
+  setTimeout(displayCountdown, 1000, 3);
+  setTimeout(displayCountdown, 2000, 2);
+  setTimeout(displayCountdown, 3000, 1);
+}
+
 // Displays results depending on win or loss
 // 'outcome' - true for win, false for lose
 // 'word' - the word currently being guessed
@@ -177,7 +191,6 @@ function displayResults (outcome, word) {
     h1.innerHTML = "YOU WIN";
     gamePrompt.innerHTML = 'Congratulations!';
     h2Result.innerHTML = `You guessed ${word}!`;
-    resultPara.innerHTML = "Starting new game in 3... 2... 1...";
     mainContainer.style.display = 'none';
     result.style.display = 'block';
   }
@@ -186,10 +199,11 @@ function displayResults (outcome, word) {
     h1.innerHTML = "YOU LOSE";
     gamePrompt.innerHTML = 'Better luck next time!';
     h2Result.innerHTML = `The correct answer was:<br>${word}`;
-    resultPara.innerHTML = "Starting new game in 3... 2... 1...";
     mainContainer.style.display = 'none';
     result.style.display = 'block';
   }
+  // Start countdown display to next round
+  countdown();
 }
 
 //---------- END FUNCTION DEFINITIONS ----------//
