@@ -92,7 +92,7 @@ function getRandomArrayElement(myArray, currentWord) {
 function initialize() {
   // Reset all values
   mainContainer.style.display = 'block';
-  result.style.display = 'none';
+  resultDiv.style.display = 'none';
   h1.innerHTML = "Guess the cat breed";
   gamePrompt.innerHTML = "Type any letter to get started!";
   guessesRemaining = maxWrongGuesses;
@@ -174,12 +174,12 @@ function checkProgress(word) {
 function countdown() {
 
   function displayCountdown(i) {
-    resultPara.innerHTML = `Starting next round in: ${i}`;
+    resultPara.innerHTML = `Starting next round in:<br>${i}`;
   }
 
   // Hide main container and show results div
   mainContainer.style.display = 'none';
-  result.style.display = 'block';
+  resultDiv.style.display = 'block';
   
   // Simulate countdown
   setTimeout(displayCountdown, 1000, 3);
