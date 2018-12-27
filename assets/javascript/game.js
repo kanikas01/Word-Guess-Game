@@ -151,7 +151,6 @@ function displayBlankWord(word) {
 // 'blankWord' - the hidden form of word, likely 'hiddenWord'
 // 'letter' - the current letter guess
 function updateBlankWord(word, blankWord, letter) {
-  ;
   var newBlankWord = '';
   for (var i = 0; i < word.length; i++) {
     if (word[i] === letter) {
