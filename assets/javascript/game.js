@@ -109,7 +109,7 @@ function initialize() {
   console.log(currentWord); // for testing
 
   // Show unknown word as series of underscores
-  hiddenWord = getBlankWord(currentWord)
+  hiddenWord = getBlankWord(currentWord);
   currentWordPara.innerHTML = displayBlankWord(hiddenWord);
 }
 
