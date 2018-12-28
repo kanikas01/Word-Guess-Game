@@ -62,6 +62,67 @@ var catBreeds = ["Abyssinian",
                 "Turkish Angora",
                 "Turkish Van"];
 
+
+//---------- FUNCTION DEFINITIONS ----------//
+
+// Select random array element (for getting random cat breed)
+// Uses recursion to prevent returning the same value twice in a row
+// Takes an array and currentWord as arguments
+function getRandomArrayElement(myArray, currentWord) {
+  var newWord = myArray[Math.floor(Math.random() * myArray.length)].toUpperCase();
+  if (newWord == currentWord) {
+    return getRandomArrayElement(myArray, currentWord);
+  }
+  else {
+    return newWord;
+  }
+}
+
+// Counts down to the start of the next round 
+function countdown() {
+
+  function displayCountdown(i) {
+    resultPara.innerHTML = `Starting next round in:<br>${i}`;
+  }
+
+  // Hide main container and show results div
+  mainContainer.style.display = 'none';
+  resultDiv.style.display = 'block';
+
+  // Simulate countdown
+  setTimeout(displayCountdown, 1000, 3);
+  setTimeout(displayCountdown, 2000, 2);
+  setTimeout(displayCountdown, 3000, 1);
+}
+
+// Initialize variables for next round
+function initialize(obj) {
+  // Reset all values
+  mainContainer.style.display = 'block';
+  resultDiv.style.display = 'none';
+  h1.innerHTML = "Guess the cat breed";
+  gamePrompt.innerHTML = "Type any letter to get started!";
+  obj.guessesRemaining = obj.maxWrongGuesses;
+  obj.isSolved = false;
+  obj.lettersGuessed = [];
+
+  // Reset DOM display
+  guessesRemainingPara.innerHTML = obj.guessesRemaining;
+  lettersGuessedPara.innerHTML = '';
+  resultPara.innerHTML = '';
+
+  // Choose a new cat
+  obj.currentWord = getRandomArrayElement(catBreeds, obj.currentWord);
+  console.log(obj.currentWord); // for testing
+
+  // Show unknown word as series of underscores
+  obj.hiddenWord = obj.getBlankWord();
+  currentWordPara.innerHTML = obj.displayBlankWord();
+}
+
+//---------- END FUNCTION DEFINITIONS ----------//
+
+
 //---------- GAME OBJECT DEFINITION ----------//
 var game = {
   maxWrongGuesses: 7,
@@ -99,12 +160,12 @@ var game = {
   // Create version of the blank word that is more legible
   displayBlankWord: function () {
     var blankWord = '';
-    for (var i = 0; i < this.currentWord.length; i++) {
-      if (this.currentWord[i] === ' ') {
+    for (var i = 0; i < this.hiddenWord.length; i++) {
+      if (this.hiddenWord[i] == ' ') {
         blankWord += '&nbsp;&nbsp;&nbsp;'
       }
       else {
-        blankWord += this.currentWord[i] + ' ';
+        blankWord += this.hiddenWord[i] + ' ';
       }
     }
     return blankWord.trim();
@@ -115,7 +176,7 @@ var game = {
   updateBlankWord: function (letter) {
     var newBlankWord = '';
     for (var i = 0; i < this.currentWord.length; i++) {
-      if (this.currentWord[i] === letter) {
+      if (this.currentWord[i] == letter) {
         newBlankWord += letter;
       }
       else {
@@ -142,53 +203,63 @@ var game = {
     }
     // Start countdown display to next round
     countdown();
-  },
-
-  // NEXT ADD INITIALIZE FUNCTION
-
+  }
 };
 
 //---------- END GAME OBJECT DEFINITION ----------//
 
-// var person = {
-//   firstName: "John",
-//   lastName: "Doe",
-//   id: 5566,
-//   fullName: function () {
-//     return this.firstName + " " + this.lastName;
-//   }
-// };
+//---------- RUN GAME ----------//
 
-//---------- FUNCTION DEFINITIONS ----------//
+initialize(game);
 
-// Select random array element (for getting random cat breed)
-// Uses recursion to prevent returning the same value twice in a row
-// Takes an array and currentWord as arguments
-function getRandomArrayElement(myArray, currentWord) {
-  var newWord = myArray[Math.floor(Math.random() * myArray.length)].toUpperCase();
-  if (newWord == currentWord) {
-    return getRandomArrayElement(myArray, currentWord);
+document.onkeyup = function (event) {
+  var guess = event.key.toUpperCase();
+
+  // Prevent keystrokes from registering if game is over
+  if ((game.isSolved) || (game.guessesRemaining == 0)) {
+    return;
+  }
+
+  // Ignore input if not a letter
+  if ( !(game.letterChoices.includes(guess)) ) {
+    return;
+  }
+
+  // Check to see if letter has already been guessed
+  if (game.lettersGuessed.includes(guess)) {
+    return;
+  }
+
+  // Check if guessed letter is in the word
+  // If so, fill in blanks. If not, add letter to 
+  // guessed letters and decrease remaining guesses
+  if (game.currentWord.includes(guess)) {
+    game.hiddenWord = game.updateBlankWord(guess);
+    game.lettersGuessed.push(guess);
+    currentWordPara.innerHTML = game.displayBlankWord();
   }
   else {
-    return newWord;
-  }
-}
-
-// Counts down to the start of the next round 
-function countdown() {
-
-  function displayCountdown(i) {
-    resultPara.innerHTML = `Starting next round in:<br>${i}`;
+    game.lettersGuessed.push(guess);
+    lettersGuessedPara.innerHTML += guess + ' ';
+    guessesRemainingPara.innerHTML = game.isSolved ? game.guessesRemaining : --game.guessesRemaining;
   }
 
-  // Hide main container and show results div
-  mainContainer.style.display = 'none';
-  resultDiv.style.display = 'block';
+  // Check to see if the puzzle has been solved
+  game.isSolved = game.checkProgress();
 
-  // Simulate countdown
-  setTimeout(displayCountdown, 1000, 3);
-  setTimeout(displayCountdown, 2000, 2);
-  setTimeout(displayCountdown, 3000, 1);
+  if (game.isSolved) {
+    // Game won state - increment'wins', display message and restart
+    game.displayResults(true);
+    winsPara.innerHTML = ++game.wins;
+    setTimeout(initialize, 4000, game);
+  }
+  else if ((game.isSolved == false) && (game.guessesRemaining <= 0)) {
+    // Game lost state - display message and restart
+    game.displayResults(false);
+    setTimeout(initialize, 4000, game);
+  }
+  else {
+    return;
+  }
+  return;
 }
-
-//---------- END FUNCTION DEFINITIONS ----------//
