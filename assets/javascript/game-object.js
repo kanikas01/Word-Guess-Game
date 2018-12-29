@@ -116,8 +116,8 @@ function initialize(obj) {
   console.log(obj.currentWord); // for testing
 
   // Show unknown word as series of underscores
-  obj.hiddenWord = obj.getBlankWord();
-  currentWordPara.innerHTML = obj.displayBlankWord();
+  obj.hiddenWord = obj.getHiddenWord();
+  currentWordPara.innerHTML = obj.displayHiddenWord();
 }
 
 //---------- END FUNCTION DEFINITIONS ----------//
@@ -141,7 +141,7 @@ var game = {
   },
   
   // Show hidden word as underscores (except space and hyphen chars)
-  getBlankWord: function () {
+  getHiddenWord: function () {
     var blankWord = '';
     for (var i = 0; i < this.currentWord.length; i++) {
       if (this.currentWord[i] === ' ') {
@@ -158,7 +158,7 @@ var game = {
   },
 
   // Create version of the blank word that is more legible
-  displayBlankWord: function () {
+  displayHiddenWord: function () {
     var blankWord = '';
     for (var i = 0; i < this.hiddenWord.length; i++) {
       if (this.hiddenWord[i] == ' ') {
@@ -173,7 +173,7 @@ var game = {
 
   // Update blank word with each correct guess
   // 'letter' - the current letter being guessed
-  updateBlankWord: function (letter) {
+  updateHiddenWord: function (letter) {
     var newBlankWord = '';
     for (var i = 0; i < this.currentWord.length; i++) {
       if (this.currentWord[i] == letter) {
@@ -234,9 +234,9 @@ document.onkeyup = function (event) {
   // If so, fill in blanks. If not, add letter to 
   // guessed letters and decrease remaining guesses
   if (game.currentWord.includes(guess)) {
-    game.hiddenWord = game.updateBlankWord(guess);
+    game.hiddenWord = game.updateHiddenWord(guess);
     game.lettersGuessed.push(guess);
-    currentWordPara.innerHTML = game.displayBlankWord();
+    currentWordPara.innerHTML = game.displayHiddenWord();
   }
   else {
     game.lettersGuessed.push(guess);
