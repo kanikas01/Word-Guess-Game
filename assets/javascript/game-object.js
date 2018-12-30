@@ -11,6 +11,7 @@ var guessesRemainingPara = document.getElementById("guesses-remaining");
 var lettersGuessedPara = document.getElementById("letters-guessed");
 var h1 = document.getElementById("h1");
 var gamePrompt = document.getElementById("game-prompt");
+var catInfoDiv = document.getElementById("cat-info");
 
 // Create array to hold our cat breeds
 var catBreeds = [ abyssinian = { name: 'Abyssinian', url: 'https://en.wikipedia.org/wiki/Abyssinian_cat' },
@@ -210,6 +211,19 @@ var game = {
     }
     // Start countdown display to next round
     countdown();
+  }, 
+
+  // Adds wikipedia link for last cat to the page when new round starts
+  addURLtoPage: function() {
+    var myPara = document.createElement('p');
+    myPara.setAttribute('class', 'm-0');
+    var myTag = document.createElement('a');
+    myTag.setAttribute('href', `${cat.url}`);
+    myTag.setAttribute('target', '_blank');
+    myTag.setAttribute('rel', 'noopener noreferrer');
+    myTag.innerHTML = cat.name;
+    myPara.appendChild(myTag);
+    catInfoDiv.appendChild(myPara);
   }
 };
 
@@ -257,12 +271,14 @@ document.onkeyup = function (event) {
   if (game.isSolved) {
     // Game won state - increment'wins', display message and restart
     game.displayResults(true);
+    game.addURLtoPage();
     winsPara.innerHTML = ++game.wins;
     setTimeout(initialize, 4000, game);
   }
   else if ((game.isSolved == false) && (game.guessesRemaining <= 0)) {
     // Game lost state - display message and restart
     game.displayResults(false);
+    game.addURLtoPage();
     setTimeout(initialize, 4000, game);
   }
   else {
