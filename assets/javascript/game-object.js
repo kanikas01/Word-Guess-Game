@@ -12,6 +12,7 @@ var lettersGuessedPara = document.getElementById("letters-guessed");
 var h1 = document.getElementById("h1");
 var gamePrompt = document.getElementById("game-prompt");
 var catInfoDiv = document.getElementById("cat-info");
+var h2CatInfo = document.getElementById("h2-cat-info");
 
 // Create array to hold our cat breeds
 var catBreeds = [ abyssinian = { name: 'Abyssinian', url: 'https://en.wikipedia.org/wiki/Abyssinian_cat' },
@@ -223,7 +224,7 @@ var game = {
     myTag.setAttribute('rel', 'noopener noreferrer');
     myTag.innerHTML = cat.name;
     myPara.appendChild(myTag);
-    catInfoDiv.appendChild(myPara);
+    catInfoDiv.insertBefore(myPara, h2CatInfo.nextSibling);
   }
 };
 
