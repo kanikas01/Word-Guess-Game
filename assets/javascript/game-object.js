@@ -13,54 +13,57 @@ var h1 = document.getElementById("h1");
 var gamePrompt = document.getElementById("game-prompt");
 
 // Create array to hold our cat breeds
-var catBreeds = ["Abyssinian",
-                "American Bobtail",
-                "American Curl",
-                "American Shorthair",
-                "American Wirehair",
-                "Balinese",
-                "Bengal",
-                "Birman",
-                "Bombay",
-                "British Shorthair",
-                "Burmese",
-                "Burmilla",
-                "Chartreux",
-                "Chinese Li Hua",
-                "Colorpoint Shorthair",
-                "Cornish Rex",
-                "Cymric",
-                "Devon Rex",
-                "Egyptian Mau",
-                "European Burmese",
-                "Havana Brown",
-                "Himalayan",
-                "Japanese Bobtail",
-                "Javanese",
-                "Korat",
-                "LaPerm",
-                "Maine Coon",
-                "Manx",
-                "Nebelung",
-                "Norwegian Forest",
-                "Nyan",
-                "Ocicat",
-                "Persian",
-                "Ragamuffin",
-                "Ragdoll",
-                "Russian Blue",
-                "Savannah",
-                "Scottish Fold",
-                "Selkirk Rex",
-                "Siamese",
-                "Siberian",
-                "Singapura",
-                "Snowshoe",
-                "Somali",
-                "Sphynx",
-                "Tonkinese",
-                "Turkish Angora",
-                "Turkish Van"];
+var catBreeds = [ abyssinian = { name: 'Abyssinian', url: 'https://en.wikipedia.org/wiki/Abyssinian_cat' },
+                  americanBobtail = { name: 'American Bobtail', url: 'https://en.wikipedia.org/wiki/American_Bobtail' },
+                  americanCurl = { name: 'American Curl', url: 'https://en.wikipedia.org/wiki/American_Curl' },
+                  americanShorthair = { name: 'American Shorthair', url: 'https://en.wikipedia.org/wiki/American_Shorthair' },
+                  americanWirehair = { name: 'American Wirehair', url: 'https://en.wikipedia.org/wiki/American_Wirehair' },
+                  balinese = { name: 'Balinese', url: 'https://en.wikipedia.org/wiki/Balinese_cat' },
+                  bengal = { name: 'Bengal', url: 'https://en.wikipedia.org/wiki/Bengal_cat' },
+                  birman = { name: 'Birman', url: 'https://en.wikipedia.org/wiki/Birman' },
+                  bombay = { name: 'Bombay', url: 'https://en.wikipedia.org/wiki/Bombay_cat' },
+                  britishShorthair = { name: 'British Shorthair', url: 'https://en.wikipedia.org/wiki/British_Shorthair' },
+                  burmese = { name: 'Burmese', url: 'https://en.wikipedia.org/wiki/Burmese_cat' },
+                  burmilla = { name: 'Burmilla', url: 'https://en.wikipedia.org/wiki/Burmilla' },
+                  chartreux = { name: 'Chartreux', url: 'https://en.wikipedia.org/wiki/Chartreux' },
+                  chineseLiHua = { name: 'Chinese Li Hua', url: 'https://en.wikipedia.org/wiki/Dragon_Li' },
+                  colorpointShorthair = { name: 'Colorpoint Shorthair', url: 'https://en.wikipedia.org/wiki/Colorpoint_Shorthair' },
+                  cornishRex = { name: 'Cornish Rex', url: 'https://en.wikipedia.org/wiki/Cornish_Rex' },
+                  cymric = { name: 'Cymric', url: 'https://en.wikipedia.org/wiki/Cymric_cat' },
+                  devonRex = { name: 'Devon Rex', url: 'https://en.wikipedia.org/wiki/Devon_Rex' },
+                  egyptianMau = { name: 'Egyptian Mau', url: 'https://en.wikipedia.org/wiki/Egyptian_Mau' },
+                  europeanBurmese = { name: 'European Burmese', url: 'https://en.wikipedia.org/wiki/Burmese_cat' },
+                  havanaBrown = { name: 'Havana Brown', url: 'https://en.wikipedia.org/wiki/Havana_Brown' },
+                  himalayan = { name: 'Himalayan', url: 'https://en.wikipedia.org/wiki/Himalayan_cat' },
+                  japaneseBobtail = { name: 'Japanese Bobtail', url: 'https://en.wikipedia.org/wiki/Japanese_Bobtail' },
+                  javanese = { name: 'Javanese', url: 'https://en.wikipedia.org/wiki/Javanese_cat' },
+                  korat = { name: 'Korat', url: 'https://en.wikipedia.org/wiki/Korat' },
+                  laperm = { name: 'LaPerm', url: 'https://en.wikipedia.org/wiki/LaPerm' },
+                  maineCoon = { name: 'Maine Coon', url: 'https://en.wikipedia.org/wiki/Maine_Coon' },
+                  manx = { name: 'Manx', url: 'https://en.wikipedia.org/wiki/Manx_cat' },
+                  nebelung = { name: 'Nebelung', url: 'https://en.wikipedia.org/wiki/Nebelung' },
+                  norwegianForest = { name: 'Norwegian Forest', url: 'https://en.wikipedia.org/wiki/Norwegian_Forest_cat' },
+                  nyan = { name: 'Nyan Cat', url: 'https://www.youtube.com/watch?v=QH2-TGUlwu4' },
+                  ocicat = { name: 'Ocicat', url: 'https://en.wikipedia.org/wiki/Ocicat' },
+                  persian = { name: 'Persian', url: 'https://en.wikipedia.org/wiki/Persian_cat' },
+                  ragamuffin = { name: 'Ragamuffin', url: 'https://en.wikipedia.org/wiki/Ragamuffin_cat' },
+                  ragdoll = { name: 'Ragdoll', url: 'https://en.wikipedia.org/wiki/Ragdoll' },
+                  russianBlue = { name: 'Russian Blue', url: 'https://en.wikipedia.org/wiki/Russian_Blue' },
+                  savannah = { name: 'Savannah', url: 'https://en.wikipedia.org/wiki/Savannah_cat' },
+                  scottishFold = { name: 'Scottish Fold', url: 'https://en.wikipedia.org/wiki/Scottish_Fold' },
+                  selkirkRex = { name: 'Selkirk Rex', url: 'https://en.wikipedia.org/wiki/Selkirk_Rex' },
+                  siamese = { name: 'Siamese', url: 'https://en.wikipedia.org/wiki/Siamese_cat' },
+                  siberian = { name: 'Siberian', url: 'https://en.wikipedia.org/wiki/Siberian_cat' },
+                  singapura = { name: 'Singapura', url: 'https://en.wikipedia.org/wiki/Singapura_cat' },
+                  snowshoe = { name: 'Snowshoe', url: 'https://en.wikipedia.org/wiki/Snowshoe_cat' },
+                  somali = { name: 'Somali', url: 'https://en.wikipedia.org/wiki/Somali_cat' },
+                  sphynx = { name: 'Sphynx', url: 'https://en.wikipedia.org/wiki/Sphynx_cat' },
+                  tonkinese = { name: 'Tonkinese', url: 'https://en.wikipedia.org/wiki/Tonkinese_cat' },
+                  turkishAngora = { name: 'Turkish Angora', url: 'https://en.wikipedia.org/wiki/Turkish_Angora' },
+                  turkishVan = { name: 'Turkish Van', url: 'https://en.wikipedia.org/wiki/Turkish_Van' }];
+
+
+
 
 
 //---------- FUNCTION DEFINITIONS ----------//
@@ -69,7 +72,7 @@ var catBreeds = ["Abyssinian",
 // Uses recursion to prevent returning the same value twice in a row
 // Takes an array and currentWord as arguments
 function getRandomArrayElement(myArray, currentWord) {
-  var newWord = myArray[Math.floor(Math.random() * myArray.length)].toUpperCase();
+  var newWord = myArray[Math.floor(Math.random() * myArray.length)];
   if (newWord == currentWord) {
     return getRandomArrayElement(myArray, currentWord);
   }
@@ -112,7 +115,8 @@ function initialize(obj) {
   resultPara.innerHTML = '';
 
   // Choose a new cat
-  obj.currentWord = getRandomArrayElement(catBreeds, obj.currentWord);
+  cat = getRandomArrayElement(catBreeds, obj.currentWord);
+  obj.currentWord = cat.name.toUpperCase();
   console.log(obj.currentWord); // for testing
 
   // Show unknown word as series of underscores
@@ -129,6 +133,7 @@ var game = {
   guessesRemaining: 0,
   isSolved: false,
   wins: 0,
+  cat: {},
   currentWord: '',
   hiddenWord: '',
   lettersGuessed: [],
@@ -193,13 +198,15 @@ var game = {
       this.happyMeow.play();
       h1.innerHTML = "YOU WIN";
       gamePrompt.innerHTML = 'Congratulations!';
-      h2Result.innerHTML = `You guessed ${this.currentWord}!`;
+      h2Result.innerHTML = `You guessed <a href='${cat.url}' target='_blank' 
+                            rel='noopener noreferrer'>${this.currentWord}</a>!`;
     }
     else {
       this.angryMeow.play();
       h1.innerHTML = "YOU LOSE";
       gamePrompt.innerHTML = 'Better luck next time!';
-      h2Result.innerHTML = `The correct answer was:<br>${this.currentWord}`;
+      h2Result.innerHTML = `The correct answer was:<br><a href='${cat.url}' target='_blank' 
+                            rel='noopener noreferrer'>${this.currentWord}</a>`;
     }
     // Start countdown display to next round
     countdown();
