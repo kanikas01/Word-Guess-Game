@@ -11,7 +11,7 @@ var guessesRemainingPara = document.getElementById("guesses-remaining");
 var lettersGuessedPara = document.getElementById("letters-guessed");
 var h1 = document.getElementById("h1");
 var gamePrompt = document.getElementById("game-prompt");
-var catInfoDiv = document.getElementById("cat-info");
+var catInfoDiv = document.getElementById("cat-info-div");
 var h2CatInfo = document.getElementById("h2-cat-info");
 
 // Create array to hold our cat breeds
