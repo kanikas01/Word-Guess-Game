@@ -71,15 +71,15 @@ var catBreeds = [ abyssinian = { name: 'Abyssinian', url: 'https://en.wikipedia.
 //---------- FUNCTION DEFINITIONS ----------//
 
 // Select random array element (for getting random cat breed)
-// Uses recursion to prevent returning the same value twice in a row
-// Takes an array and currentWord as arguments
+// Uses recursion to prevent returning the same element twice in a row
+// Takes an array of objects and currentWord as arguments
 function getRandomArrayElement(myArray, currentWord) {
-  var newWord = myArray[Math.floor(Math.random() * myArray.length)];
-  if (newWord == currentWord) {
+  var newObject = myArray[Math.floor(Math.random() * myArray.length)];
+  if (newObject.name == currentWord) {
     return getRandomArrayElement(myArray, currentWord);
   }
   else {
-    return newWord;
+    return newObject;
   }
 }
 
