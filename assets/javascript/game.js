@@ -39,7 +39,7 @@ var catBreeds = [ abyssinian = { name: 'Abyssinian', url: 'https://en.wikipedia.
                   japaneseBobtail = { name: 'Japanese Bobtail', url: 'https://en.wikipedia.org/wiki/Japanese_Bobtail' },
                   javanese = { name: 'Javanese', url: 'https://en.wikipedia.org/wiki/Javanese_cat' },
                   korat = { name: 'Korat', url: 'https://en.wikipedia.org/wiki/Korat' },
-                  laperm = { name: 'LaPerm', url: 'https://en.wikipedia.org/wiki/LaPerm' },
+                  laPerm = { name: 'LaPerm', url: 'https://en.wikipedia.org/wiki/LaPerm' },
                   maineCoon = { name: 'Maine Coon', url: 'https://en.wikipedia.org/wiki/Maine_Coon' },
                   manx = { name: 'Manx', url: 'https://en.wikipedia.org/wiki/Manx_cat' },
                   nebelung = { name: 'Nebelung', url: 'https://en.wikipedia.org/wiki/Nebelung' },
