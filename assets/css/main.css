@@ -35,7 +35,7 @@ a:hover {
 
 .inner-container {
   display: grid;
-  grid-template-columns: repeat(3, 33.33%);
+  grid-template-columns: repeat(4, 25%);
   grid-template-rows: repeat(5, 20%);
 }
 
@@ -43,17 +43,20 @@ a:hover {
   grid-column: 1 / 2;
   grid-row: 1 /2;
   font-size: 2rem;
+  max-height: 160px;
 }
 
 #guesses-remaining-div {
-  grid-column-start: 3;
-  grid-row-start: 1;
+  grid-column: 1 / 2;
+  grid-row: 3 / 4;
   font-size: 2rem;
+  max-height: 160px;
 }
 
 #current-word-div {
-  grid-column: 2 / 3;
-  grid-row: 3 / 4;
+  grid-column: 2 / 4;
+  grid-row: 1 / 3;
+  font-size: 2rem;
 }
 
 #wins-div {
@@ -61,9 +64,10 @@ a:hover {
   grid-column-end: 2;
   grid-row-start: 5;
   font-size: 2rem;
+  max-height: 160px;
 }
 
 #cat-info-div {
-  grid-column-start: 3;
-  grid-row-start: 5;
+  grid-column: 4 / 5;
+  grid-row: 1 / 6;
 }
