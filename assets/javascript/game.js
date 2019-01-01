@@ -13,7 +13,7 @@ var h1 = document.getElementById("h1");
 var gamePrompt = document.getElementById("game-prompt");
 var catInfoInnerDiv = document.getElementById("cat-info-inner-div");
 
-// Create array to hold our cat breeds
+// Create array to hold our cat breed objects
 var catBreeds = [ abyssinian = { name: 'Abyssinian', url: 'https://en.wikipedia.org/wiki/Abyssinian_cat' },
                   americanBobtail = { name: 'American Bobtail', url: 'https://en.wikipedia.org/wiki/American_Bobtail' },
                   americanCurl = { name: 'American Curl', url: 'https://en.wikipedia.org/wiki/American_Curl' },
