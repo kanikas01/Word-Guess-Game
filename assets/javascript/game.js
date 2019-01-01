@@ -1,3 +1,4 @@
+// This version of the game file uses an object-oriented approach
 
 // Assign variables to each important html tag
 var mainContainer = document.getElementById("main-container");
@@ -10,163 +11,75 @@ var guessesRemainingPara = document.getElementById("guesses-remaining");
 var lettersGuessedPara = document.getElementById("letters-guessed");
 var h1 = document.getElementById("h1");
 var gamePrompt = document.getElementById("game-prompt");
-
-// Declare and initialize additional variables
-const maxWrongGuesses = 7;  // Max number of wrong guesses allowed before losing game
-var isSolved = false;       // Has the puzzle been solved
-var guessesRemaining = 0;   // Number of wrong guesses remaining before losing game
-var wins = 0;               // Number of wins in session
-var currentWord = '';       // The word being guessed
-var hiddenWord = '';        // currentWord with unguessed letters replaced by underscores
-var lettersGuessed = [];    // Holds letters guessed during gameplay
-var letterChoices = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';   // All possible legit key inputs
-var happyMeow = new Audio('assets/sounds/meow.mp3');        // Happy cat sound
-var angryMeow = new Audio('assets/sounds/angry-meow.mp3');  // Angry cat sound
+var catInfoInnerDiv = document.getElementById("cat-info-inner-div");
 
 // Create array to hold our cat breeds
-var catBreeds = ["Abyssinian",
-                "American Bobtail",
-                "American Curl",
-                "American Shorthair",
-                "American Wirehair",
-                "Balinese",
-                "Bengal",
-                "Birman",
-                "Bombay",
-                "British Shorthair",
-                "Burmese",
-                "Burmilla",
-                "Chartreux",
-                "Chinese Li Hua",
-                "Colorpoint Shorthair",
-                "Cornish Rex",
-                "Cymric",
-                "Devon Rex",
-                "Egyptian Mau",
-                "European Burmese",
-                "Havana Brown",
-                "Himalayan",
-                "Japanese Bobtail",
-                "Javanese",
-                "Korat",
-                "LaPerm",
-                "Maine Coon",
-                "Manx",
-                "Nebelung",
-                "Norwegian Forest",
-                "Nyan",
-                "Ocicat",
-                "Persian",
-                "Ragamuffin",
-                "Ragdoll",
-                "Russian Blue",
-                "Savannah",
-                "Scottish Fold",
-                "Selkirk Rex",
-                "Siamese",
-                "Siberian",
-                "Singapura",
-                "Snowshoe",
-                "Somali",
-                "Sphynx",
-                "Tonkinese",
-                "Turkish Angora",
-                "Turkish Van"];
+var catBreeds = [ abyssinian = { name: 'Abyssinian', url: 'https://en.wikipedia.org/wiki/Abyssinian_cat' },
+                  americanBobtail = { name: 'American Bobtail', url: 'https://en.wikipedia.org/wiki/American_Bobtail' },
+                  americanCurl = { name: 'American Curl', url: 'https://en.wikipedia.org/wiki/American_Curl' },
+                  americanShorthair = { name: 'American Shorthair', url: 'https://en.wikipedia.org/wiki/American_Shorthair' },
+                  americanWirehair = { name: 'American Wirehair', url: 'https://en.wikipedia.org/wiki/American_Wirehair' },
+                  balinese = { name: 'Balinese', url: 'https://en.wikipedia.org/wiki/Balinese_cat' },
+                  bengal = { name: 'Bengal', url: 'https://en.wikipedia.org/wiki/Bengal_cat' },
+                  birman = { name: 'Birman', url: 'https://en.wikipedia.org/wiki/Birman' },
+                  bombay = { name: 'Bombay', url: 'https://en.wikipedia.org/wiki/Bombay_cat' },
+                  britishShorthair = { name: 'British Shorthair', url: 'https://en.wikipedia.org/wiki/British_Shorthair' },
+                  burmese = { name: 'Burmese', url: 'https://en.wikipedia.org/wiki/Burmese_cat' },
+                  burmilla = { name: 'Burmilla', url: 'https://en.wikipedia.org/wiki/Burmilla' },
+                  chartreux = { name: 'Chartreux', url: 'https://en.wikipedia.org/wiki/Chartreux' },
+                  chineseLiHua = { name: 'Chinese Li Hua', url: 'https://en.wikipedia.org/wiki/Dragon_Li' },
+                  colorpointShorthair = { name: 'Colorpoint Shorthair', url: 'https://en.wikipedia.org/wiki/Colorpoint_Shorthair' },
+                  cornishRex = { name: 'Cornish Rex', url: 'https://en.wikipedia.org/wiki/Cornish_Rex' },
+                  cymric = { name: 'Cymric', url: 'https://en.wikipedia.org/wiki/Cymric_cat' },
+                  devonRex = { name: 'Devon Rex', url: 'https://en.wikipedia.org/wiki/Devon_Rex' },
+                  egyptianMau = { name: 'Egyptian Mau', url: 'https://en.wikipedia.org/wiki/Egyptian_Mau' },
+                  europeanBurmese = { name: 'European Burmese', url: 'https://en.wikipedia.org/wiki/Burmese_cat' },
+                  havanaBrown = { name: 'Havana Brown', url: 'https://en.wikipedia.org/wiki/Havana_Brown' },
+                  himalayan = { name: 'Himalayan', url: 'https://en.wikipedia.org/wiki/Himalayan_cat' },
+                  japaneseBobtail = { name: 'Japanese Bobtail', url: 'https://en.wikipedia.org/wiki/Japanese_Bobtail' },
+                  javanese = { name: 'Javanese', url: 'https://en.wikipedia.org/wiki/Javanese_cat' },
+                  korat = { name: 'Korat', url: 'https://en.wikipedia.org/wiki/Korat' },
+                  laperm = { name: 'LaPerm', url: 'https://en.wikipedia.org/wiki/LaPerm' },
+                  maineCoon = { name: 'Maine Coon', url: 'https://en.wikipedia.org/wiki/Maine_Coon' },
+                  manx = { name: 'Manx', url: 'https://en.wikipedia.org/wiki/Manx_cat' },
+                  nebelung = { name: 'Nebelung', url: 'https://en.wikipedia.org/wiki/Nebelung' },
+                  norwegianForest = { name: 'Norwegian Forest', url: 'https://en.wikipedia.org/wiki/Norwegian_Forest_cat' },
+                  nyan = { name: 'Nyan Cat', url: 'https://www.youtube.com/watch?v=QH2-TGUlwu4' },
+                  ocicat = { name: 'Ocicat', url: 'https://en.wikipedia.org/wiki/Ocicat' },
+                  persian = { name: 'Persian', url: 'https://en.wikipedia.org/wiki/Persian_cat' },
+                  ragamuffin = { name: 'Ragamuffin', url: 'https://en.wikipedia.org/wiki/Ragamuffin_cat' },
+                  ragdoll = { name: 'Ragdoll', url: 'https://en.wikipedia.org/wiki/Ragdoll' },
+                  russianBlue = { name: 'Russian Blue', url: 'https://en.wikipedia.org/wiki/Russian_Blue' },
+                  savannah = { name: 'Savannah', url: 'https://en.wikipedia.org/wiki/Savannah_cat' },
+                  scottishFold = { name: 'Scottish Fold', url: 'https://en.wikipedia.org/wiki/Scottish_Fold' },
+                  selkirkRex = { name: 'Selkirk Rex', url: 'https://en.wikipedia.org/wiki/Selkirk_Rex' },
+                  siamese = { name: 'Siamese', url: 'https://en.wikipedia.org/wiki/Siamese_cat' },
+                  siberian = { name: 'Siberian', url: 'https://en.wikipedia.org/wiki/Siberian_cat' },
+                  singapura = { name: 'Singapura', url: 'https://en.wikipedia.org/wiki/Singapura_cat' },
+                  snowshoe = { name: 'Snowshoe', url: 'https://en.wikipedia.org/wiki/Snowshoe_cat' },
+                  somali = { name: 'Somali', url: 'https://en.wikipedia.org/wiki/Somali_cat' },
+                  sphynx = { name: 'Sphynx', url: 'https://en.wikipedia.org/wiki/Sphynx_cat' },
+                  tonkinese = { name: 'Tonkinese', url: 'https://en.wikipedia.org/wiki/Tonkinese_cat' },
+                  turkishAngora = { name: 'Turkish Angora', url: 'https://en.wikipedia.org/wiki/Turkish_Angora' },
+                  turkishVan = { name: 'Turkish Van', url: 'https://en.wikipedia.org/wiki/Turkish_Van' }];
+
+
+
+
 
 //---------- FUNCTION DEFINITIONS ----------//
 
 // Select random array element (for getting random cat breed)
-// Uses recursion to prevent returning the same value twice in a row
-// Takes an array and currentWord as arguments
+// Uses recursion to prevent returning the same element twice in a row
+// Takes an array of objects and currentWord as arguments
 function getRandomArrayElement(myArray, currentWord) {
-  var newWord = myArray[Math.floor(Math.random() * myArray.length)].toUpperCase();
-  if (newWord == currentWord) {
+  var newObject = myArray[Math.floor(Math.random() * myArray.length)];
+  if (newObject.name == currentWord) {
     return getRandomArrayElement(myArray, currentWord);
   }
   else {
-    return newWord;
+    return newObject;
   }
-}
-
-// Initialize variables for next round
-function initialize() {
-  // Reset all values
-  mainContainer.style.display = 'block';
-  resultDiv.style.display = 'none';
-  h1.innerHTML = "Guess the cat breed";
-  gamePrompt.innerHTML = "Type any letter to get started!";
-  guessesRemaining = maxWrongGuesses;
-  isSolved = false;
-  lettersGuessed = [];
-
-  // Reset DOM display
-  guessesRemainingPara.innerHTML = guessesRemaining;
-  lettersGuessedPara.innerHTML = '';
-  resultPara.innerHTML = '';
-
-  // Choose a new cat
-  currentWord = getRandomArrayElement(catBreeds, currentWord);
-  console.log(currentWord); // for testing
-
-  // Show unknown word as series of underscores
-  hiddenWord = getHiddenWord(currentWord);
-  currentWordPara.innerHTML = displayHiddenWord(hiddenWord);
-}
-
-// Show hidden word as underscores (except space and hyphen chars)
-// 'word' - the word currently being guessed
-function getHiddenWord(word) {
-  var blankWord = '';
-  for (var i = 0; i < word.length; i++) {
-    if (word[i] === ' ') {
-      blankWord += ' ';
-    }
-    else if (word[i] === '-') {
-      blankWord += '-';
-    }
-    else {
-      blankWord += "_";
-    }
-  }
-  return blankWord;
-}
-
-// Create version of the blank word that is more legible
-// 'word' - the word currently being guessed
-function displayHiddenWord(word) {
-  var blankWord = '';
-  for (var i = 0; i < word.length; i++) {
-    if (word[i] === ' ') {
-      blankWord += '&nbsp;&nbsp;&nbsp;'
-    }
-    else {
-      blankWord += word[i] + ' ';
-    }
-  }
-  return blankWord.trim();
-}
-
-// Update blank word with each correct guess
-// 'word' - the word currently being guessed
-// 'blankWord' - the hidden form of word, likely 'hiddenWord'
-// 'letter' - the current letter guess
-function updateHiddenWord(word, blankWord, letter) {
-  var newBlankWord = '';
-  for (var i = 0; i < word.length; i++) {
-    if (word[i] === letter) {
-      newBlankWord += letter;
-    }
-    else {
-      newBlankWord += blankWord[i];
-    }
-  }
-  return newBlankWord;
-}
-
-// Check whether the word has been guessed
-// 'word' - the word currently being guessed
-function checkProgress(word) {
-  return !(word.includes('_'));
 }
 
 // Counts down to the start of the next round 
@@ -179,82 +92,201 @@ function countdown() {
   // Hide main container and show results div
   mainContainer.style.display = 'none';
   resultDiv.style.display = 'block';
-  
+
   // Simulate countdown
   setTimeout(displayCountdown, 1000, 3);
   setTimeout(displayCountdown, 2000, 2);
   setTimeout(displayCountdown, 3000, 1);
 }
 
-// Displays results depending on win or loss
-// 'outcome' - true for win, false for lose
-// 'word' - the word currently being guessed
-function displayResults (outcome, word) {
-  if (outcome) {
-    happyMeow.play();
-    h1.innerHTML = "YOU WIN";
-    gamePrompt.innerHTML = 'Congratulations!';
-    h2Result.innerHTML = `You guessed ${word}!`;
-  }
-  else {
-    angryMeow.play();
-    h1.innerHTML = "YOU LOSE";
-    gamePrompt.innerHTML = 'Better luck next time!';
-    h2Result.innerHTML = `The correct answer was:<br>${word}`;
-  }
-  // Start countdown display to next round
-  countdown();
+// Initialize variables for next round
+function initialize(obj) {
+  // Reset all values
+  mainContainer.style.display = 'block';
+  resultDiv.style.display = 'none';
+  h1.innerHTML = "Guess the cat breed";
+  gamePrompt.innerHTML = "Type any letter to get started!";
+  obj.guessesRemaining = obj.maxWrongGuesses;
+  obj.isSolved = false;
+  obj.lettersGuessed = [];
+
+  // Reset DOM display
+  guessesRemainingPara.innerHTML = obj.guessesRemaining;
+  lettersGuessedPara.innerHTML = '';
+  resultPara.innerHTML = '';
+
+  // Choose a new cat
+  cat = getRandomArrayElement(catBreeds, obj.currentWord);
+  obj.currentWord = cat.name.toUpperCase();
+  console.log(obj.currentWord); // for testing
+
+  // Show unknown word as series of underscores
+  obj.hiddenWord = obj.getHiddenWord();
+  currentWordPara.innerHTML = obj.displayHiddenWord();
 }
 
 //---------- END FUNCTION DEFINITIONS ----------//
 
-initialize();
+
+//---------- GAME OBJECT DEFINITION ----------//
+var game = {
+  maxWrongGuesses: 7,
+  guessesRemaining: 0,
+  isSolved: false,
+  wins: 0,
+  cat: {},
+  currentWord: '',
+  hiddenWord: '',
+  lettersGuessed: [],
+  letterChoices: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+  happyMeow: new Audio('assets/sounds/meow.mp3'),
+  angryMeow: new Audio('assets/sounds/angry-meow.mp3'),
+  roundsPlayed: 0,
+  maxDisplayedBreeds: 7,
+
+  checkProgress: function () {
+    return !(this.hiddenWord.includes('_'));
+  },
+  
+  // Show hidden word as underscores (except space and hyphen chars)
+  getHiddenWord: function () {
+    var blankWord = '';
+    for (var i = 0; i < this.currentWord.length; i++) {
+      if (this.currentWord[i] === ' ') {
+        blankWord += ' ';
+      }
+      else if (this.currentWord[i] === '-') {
+        blankWord += '-';
+      }
+      else {
+        blankWord += "_";
+      }
+    }
+    return blankWord;
+  },
+
+  // Create version of the blank word that is more legible
+  displayHiddenWord: function () {
+    var blankWord = '';
+    for (var i = 0; i < this.hiddenWord.length; i++) {
+      if (this.hiddenWord[i] == ' ') {
+        blankWord += '&nbsp;&nbsp;&nbsp;'
+      }
+      else {
+        blankWord += this.hiddenWord[i] + ' ';
+      }
+    }
+    return blankWord.trim();
+  },
+
+  // Update blank word with each correct guess
+  // 'letter' - the current letter being guessed
+  updateHiddenWord: function (letter) {
+    var newBlankWord = '';
+    for (var i = 0; i < this.currentWord.length; i++) {
+      if (this.currentWord[i] == letter) {
+        newBlankWord += letter;
+      }
+      else {
+        newBlankWord += this.hiddenWord[i];
+      }
+    }
+    return newBlankWord;
+  },
+
+  // Displays results depending on win or loss
+  // 'outcome' - true for win, false for lose
+  displayResults: function (outcome) {
+    if (outcome) {
+      this.happyMeow.play();
+      h1.innerHTML = "YOU WIN";
+      gamePrompt.innerHTML = 'Congratulations!';
+      h2Result.innerHTML = `You guessed <a href='${cat.url}' target='_blank' 
+                            rel='noopener noreferrer'>${this.currentWord}</a>!`;
+    }
+    else {
+      this.angryMeow.play();
+      h1.innerHTML = "YOU LOSE";
+      gamePrompt.innerHTML = 'Better luck next time!';
+      h2Result.innerHTML = `The correct answer was:<br><a href='${cat.url}' target='_blank' 
+                            rel='noopener noreferrer'>${this.currentWord}</a>`;
+    }
+    // Start countdown display to next round
+    countdown();
+  }, 
+
+  // Adds wikipedia link for last cat to the page when new round starts
+  addURLtoPage: function() {
+    if (this.roundsPlayed >= this.maxDisplayedBreeds) {
+      catInfoInnerDiv.removeChild(catInfoInnerDiv.lastElementChild);
+    }
+    var myPara = document.createElement('p');
+    myPara.setAttribute('class', 'm-0');
+    var myTag = document.createElement('a');
+    myTag.setAttribute('href', `${cat.url}`);
+    myTag.setAttribute('target', '_blank');
+    myTag.setAttribute('rel', 'noopener noreferrer');
+    myTag.innerHTML = cat.name;
+    myPara.appendChild(myTag);
+    catInfoInnerDiv.insertBefore(myPara, catInfoInnerDiv.firstChild);    
+  }
+};
+
+//---------- END GAME OBJECT DEFINITION ----------//
+
+//---------- RUN GAME ----------//
+
+initialize(game);
 
 document.onkeyup = function (event) {
   var guess = event.key.toUpperCase();
 
   // Prevent keystrokes from registering if game is over
-  if ((isSolved) || (guessesRemaining == 0)) {
+  if ((game.isSolved) || (game.guessesRemaining == 0)) {
     return;
   }
 
   // Ignore input if not a letter
-  if (!(letterChoices.includes(guess))) {
+  if ( !(game.letterChoices.includes(guess)) ) {
     return;
   }
 
   // Check to see if letter has already been guessed
-  if (lettersGuessed.includes(guess)) {
+  if (game.lettersGuessed.includes(guess)) {
     return;
   }
 
   // Check if guessed letter is in the word
   // If so, fill in blanks. If not, add letter to 
   // guessed letters and decrease remaining guesses
-  if (currentWord.includes(guess)) {
-    hiddenWord = updateHiddenWord(currentWord, hiddenWord, guess);
-    lettersGuessed.push(guess);
-    currentWordPara.innerHTML = displayHiddenWord(hiddenWord);
+  if (game.currentWord.includes(guess)) {
+    game.hiddenWord = game.updateHiddenWord(guess);
+    game.lettersGuessed.push(guess);
+    currentWordPara.innerHTML = game.displayHiddenWord();
   }
   else {
-    lettersGuessed.push(guess);
+    game.lettersGuessed.push(guess);
     lettersGuessedPara.innerHTML += guess + ' ';
-    guessesRemainingPara.innerHTML = isSolved ? guessesRemaining : --guessesRemaining;
+    guessesRemainingPara.innerHTML = game.isSolved ? game.guessesRemaining : --game.guessesRemaining;
   }
 
   // Check to see if the puzzle has been solved
-  isSolved = checkProgress(hiddenWord);
+  game.isSolved = game.checkProgress();
 
-  if (isSolved) {
+  if (game.isSolved) {
     // Game won state - increment'wins', display message and restart
-    displayResults(true, currentWord);
-    winsPara.innerHTML = ++wins;
-    setTimeout(initialize, 4000);
+    game.displayResults(true);
+    game.addURLtoPage();
+    winsPara.innerHTML = ++game.wins;
+    setTimeout(initialize, 4000, game);
+    game.roundsPlayed++;
   }
-  else if ((isSolved == false) && (guessesRemaining <= 0)) {
+  else if ((game.isSolved == false) && (game.guessesRemaining <= 0)) {
     // Game lost state - display message and restart
-    displayResults(false, currentWord);
-    setTimeout(initialize, 4000);
+    game.displayResults(false);
+    game.addURLtoPage();
+    setTimeout(initialize, 4000, game);
+    game.roundsPlayed++;
   }
   else {
     return;
