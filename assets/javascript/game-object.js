@@ -142,7 +142,7 @@ var game = {
   happyMeow: new Audio('assets/sounds/meow.mp3'),
   angryMeow: new Audio('assets/sounds/angry-meow.mp3'),
   roundsPlayed: 0,
-  maxDisplayedBreeds: 5,
+  maxDisplayedBreeds: 7,
 
   checkProgress: function () {
     return !(this.hiddenWord.includes('_'));
