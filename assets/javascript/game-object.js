@@ -141,6 +141,8 @@ var game = {
   letterChoices: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
   happyMeow: new Audio('assets/sounds/meow.mp3'),
   angryMeow: new Audio('assets/sounds/angry-meow.mp3'),
+  roundsPlayed: 0,
+  maxDisplayedBreeds: 5,
 
   checkProgress: function () {
     return !(this.hiddenWord.includes('_'));
@@ -215,6 +217,9 @@ var game = {
 
   // Adds wikipedia link for last cat to the page when new round starts
   addURLtoPage: function() {
+    if (this.roundsPlayed >= this.maxDisplayedBreeds) {
+      catInfoInnerDiv.removeChild(catInfoInnerDiv.lastElementChild);
+    }
     var myPara = document.createElement('p');
     myPara.setAttribute('class', 'm-0');
     var myTag = document.createElement('a');
@@ -223,7 +228,7 @@ var game = {
     myTag.setAttribute('rel', 'noopener noreferrer');
     myTag.innerHTML = cat.name;
     myPara.appendChild(myTag);
-    catInfoInnerDiv.appendChild(myPara);
+    catInfoInnerDiv.insertBefore(myPara, catInfoInnerDiv.firstChild);    
   }
 };
 
@@ -274,12 +279,14 @@ document.onkeyup = function (event) {
     game.addURLtoPage();
     winsPara.innerHTML = ++game.wins;
     setTimeout(initialize, 4000, game);
+    game.roundsPlayed++;
   }
   else if ((game.isSolved == false) && (game.guessesRemaining <= 0)) {
     // Game lost state - display message and restart
     game.displayResults(false);
     game.addURLtoPage();
     setTimeout(initialize, 4000, game);
+    game.roundsPlayed++;
   }
   else {
     return;
