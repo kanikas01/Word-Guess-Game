@@ -19,17 +19,22 @@ body {
 /* END Sticky footer styles
 -------------------------------------------------- */
 
+body {
+  background-color: black;
+  color: aliceblue;
+}
+
 .jumbotron {
   color: aliceblue;
   background-color: #7b0707;
 }
 
 a {
-  color: #7b0707;
+  color: #c43737;
 }
 
 a:hover {
-  color: #7b0707;
+  color: #c43737;
   text-decoration: underline;
 }
 
