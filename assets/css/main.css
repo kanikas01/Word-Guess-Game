@@ -29,6 +29,10 @@ body {
   background-color: #07667b;
 }
 
+#h1, #game-prompt {
+  font-weight: 400;
+}
+
 img {
   width: 90px;
   height: 96px;
