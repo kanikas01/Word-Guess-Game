@@ -2,7 +2,7 @@
 
 Assignment 3 - Word Guess Game
 
-This is a simple hangman application where the user tries to guess different cat breeds. At the end of each round, a link to the wikipedia page for the cat breed from that round is displayed in a list so that players can learn more about each breed, as many of these breeds are probably unknown to the general public.
+This is a simple hangman application where the user tries to guess different cat breeds. At the beginning of each new round, a link to the wikipedia page for the cat breed from the previous round is displayed in a list so that players can learn more about each breed.
 
 Core gameplay is controlled by the file [game.js](assets/javascript/game.js).  The game largely relies on an object-oriented approach, encapsulating the majority of gameplay functionality in a 'game' object.
 
