@@ -26,15 +26,20 @@ body {
 
 .jumbotron {
   color: aliceblue;
-  background-color: #7b0707;
+  background-color: #07667b;
+}
+
+img {
+  width: 90px;
+  height: 96px;
 }
 
 a {
-  color: #c43737;
+  color: #d44444;
 }
 
 a:hover {
-  color: #c43737;
+  color: #d44444;
   text-decoration: underline;
 }
 
