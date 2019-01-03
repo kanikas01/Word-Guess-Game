@@ -118,7 +118,7 @@ function initialize(obj) {
   // Choose a new cat
   cat = getRandomArrayElement(catBreeds, obj.currentWord);
   obj.currentWord = cat.name.toUpperCase();
-  console.log(obj.currentWord); // for testing
+  // console.log(obj.currentWord); // for testing
 
   // Show unknown word as series of underscores
   obj.hiddenWord = obj.getHiddenWord();
