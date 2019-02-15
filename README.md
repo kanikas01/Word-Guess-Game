@@ -1,6 +1,6 @@
 # Word-Guess-Game
 
-Assignment 3 - Word Guess Game
+Word Guess Game
 
 [Click here to view deployed project](https://kanikas01.github.io/Word-Guess-Game/)
 
