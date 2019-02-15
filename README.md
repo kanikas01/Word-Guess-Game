@@ -2,7 +2,7 @@
 
 Assignment 3 - Word Guess Game
 
-[Link to deployed project](https://kanikas01.github.io/Word-Guess-Game/)
+[Click here to view deployed project](https://kanikas01.github.io/Word-Guess-Game/)
 
 This is a simple hangman application where the user tries to guess different cat breeds. At the beginning of each new round, a link to the wikipedia page for the cat breed from the previous round is displayed in a list so that players can learn more about each breed.
 
