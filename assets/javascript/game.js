@@ -14,57 +14,198 @@ var gamePrompt = document.getElementById("game-prompt");
 var catInfoInnerDiv = document.getElementById("cat-info-inner-div");
 
 // Create array to hold our cat breed objects
-var catBreeds = [ abyssinian = { name: 'Abyssinian', url: 'https://en.wikipedia.org/wiki/Abyssinian_cat' },
-                  americanBobtail = { name: 'American Bobtail', url: 'https://en.wikipedia.org/wiki/American_Bobtail' },
-                  americanCurl = { name: 'American Curl', url: 'https://en.wikipedia.org/wiki/American_Curl' },
-                  americanShorthair = { name: 'American Shorthair', url: 'https://en.wikipedia.org/wiki/American_Shorthair' },
-                  americanWirehair = { name: 'American Wirehair', url: 'https://en.wikipedia.org/wiki/American_Wirehair' },
-                  balinese = { name: 'Balinese', url: 'https://en.wikipedia.org/wiki/Balinese_cat' },
-                  bengal = { name: 'Bengal', url: 'https://en.wikipedia.org/wiki/Bengal_cat' },
-                  birman = { name: 'Birman', url: 'https://en.wikipedia.org/wiki/Birman' },
-                  bombay = { name: 'Bombay', url: 'https://en.wikipedia.org/wiki/Bombay_cat' },
-                  britishShorthair = { name: 'British Shorthair', url: 'https://en.wikipedia.org/wiki/British_Shorthair' },
-                  burmese = { name: 'Burmese', url: 'https://en.wikipedia.org/wiki/Burmese_cat' },
-                  burmilla = { name: 'Burmilla', url: 'https://en.wikipedia.org/wiki/Burmilla' },
-                  chartreux = { name: 'Chartreux', url: 'https://en.wikipedia.org/wiki/Chartreux' },
-                  chineseLiHua = { name: 'Chinese Li Hua', url: 'https://en.wikipedia.org/wiki/Dragon_Li' },
-                  colorpointShorthair = { name: 'Colorpoint Shorthair', url: 'https://en.wikipedia.org/wiki/Colorpoint_Shorthair' },
-                  cornishRex = { name: 'Cornish Rex', url: 'https://en.wikipedia.org/wiki/Cornish_Rex' },
-                  cymric = { name: 'Cymric', url: 'https://en.wikipedia.org/wiki/Cymric_cat' },
-                  devonRex = { name: 'Devon Rex', url: 'https://en.wikipedia.org/wiki/Devon_Rex' },
-                  egyptianMau = { name: 'Egyptian Mau', url: 'https://en.wikipedia.org/wiki/Egyptian_Mau' },
-                  europeanBurmese = { name: 'European Burmese', url: 'https://en.wikipedia.org/wiki/Burmese_cat' },
-                  havanaBrown = { name: 'Havana Brown', url: 'https://en.wikipedia.org/wiki/Havana_Brown' },
-                  himalayan = { name: 'Himalayan', url: 'https://en.wikipedia.org/wiki/Himalayan_cat' },
-                  japaneseBobtail = { name: 'Japanese Bobtail', url: 'https://en.wikipedia.org/wiki/Japanese_Bobtail' },
-                  javanese = { name: 'Javanese', url: 'https://en.wikipedia.org/wiki/Javanese_cat' },
-                  korat = { name: 'Korat', url: 'https://en.wikipedia.org/wiki/Korat' },
-                  laPerm = { name: 'LaPerm', url: 'https://en.wikipedia.org/wiki/LaPerm' },
-                  maineCoon = { name: 'Maine Coon', url: 'https://en.wikipedia.org/wiki/Maine_Coon' },
-                  manx = { name: 'Manx', url: 'https://en.wikipedia.org/wiki/Manx_cat' },
-                  nebelung = { name: 'Nebelung', url: 'https://en.wikipedia.org/wiki/Nebelung' },
-                  norwegianForest = { name: 'Norwegian Forest', url: 'https://en.wikipedia.org/wiki/Norwegian_Forest_cat' },
-                  nyan = { name: 'Nyan Cat', url: 'https://www.youtube.com/watch?v=QH2-TGUlwu4' },
-                  ocicat = { name: 'Ocicat', url: 'https://en.wikipedia.org/wiki/Ocicat' },
-                  persian = { name: 'Persian', url: 'https://en.wikipedia.org/wiki/Persian_cat' },
-                  ragamuffin = { name: 'Ragamuffin', url: 'https://en.wikipedia.org/wiki/Ragamuffin_cat' },
-                  ragdoll = { name: 'Ragdoll', url: 'https://en.wikipedia.org/wiki/Ragdoll' },
-                  russianBlue = { name: 'Russian Blue', url: 'https://en.wikipedia.org/wiki/Russian_Blue' },
-                  savannah = { name: 'Savannah', url: 'https://en.wikipedia.org/wiki/Savannah_cat' },
-                  scottishFold = { name: 'Scottish Fold', url: 'https://en.wikipedia.org/wiki/Scottish_Fold' },
-                  selkirkRex = { name: 'Selkirk Rex', url: 'https://en.wikipedia.org/wiki/Selkirk_Rex' },
-                  siamese = { name: 'Siamese', url: 'https://en.wikipedia.org/wiki/Siamese_cat' },
-                  siberian = { name: 'Siberian', url: 'https://en.wikipedia.org/wiki/Siberian_cat' },
-                  singapura = { name: 'Singapura', url: 'https://en.wikipedia.org/wiki/Singapura_cat' },
-                  snowshoe = { name: 'Snowshoe', url: 'https://en.wikipedia.org/wiki/Snowshoe_cat' },
-                  somali = { name: 'Somali', url: 'https://en.wikipedia.org/wiki/Somali_cat' },
-                  sphynx = { name: 'Sphynx', url: 'https://en.wikipedia.org/wiki/Sphynx_cat' },
-                  tonkinese = { name: 'Tonkinese', url: 'https://en.wikipedia.org/wiki/Tonkinese_cat' },
-                  turkishAngora = { name: 'Turkish Angora', url: 'https://en.wikipedia.org/wiki/Turkish_Angora' },
-                  turkishVan = { name: 'Turkish Van', url: 'https://en.wikipedia.org/wiki/Turkish_Van' }];
-
-
-
+var catBreeds = [ abyssinian = { 
+                    name: 'Abyssinian', 
+                    url: 'https://en.wikipedia.org/wiki/Abyssinian_cat' 
+                  },
+                  americanBobtail = { 
+                    name: 'American Bobtail', 
+                    url: 'https://en.wikipedia.org/wiki/American_Bobtail' 
+                  },
+                  americanCurl = { 
+                    name: 'American Curl', 
+                    url: 'https://en.wikipedia.org/wiki/American_Curl' 
+                  },
+                  americanShorthair = { 
+                    name: 'American Shorthair', 
+                    url: 'https://en.wikipedia.org/wiki/American_Shorthair' 
+                  },
+                  americanWirehair = { 
+                    name: 'American Wirehair', 
+                    url: 'https://en.wikipedia.org/wiki/American_Wirehair' 
+                  },
+                  balinese = { 
+                    name: 'Balinese', 
+                    url: 'https://en.wikipedia.org/wiki/Balinese_cat' 
+                  },
+                  bengal = { 
+                    name: 'Bengal', 
+                    url: 'https://en.wikipedia.org/wiki/Bengal_cat' 
+                  },
+                  birman = { 
+                    name: 'Birman', 
+                    url: 'https://en.wikipedia.org/wiki/Birman' 
+                  },
+                  bombay = { 
+                    name: 'Bombay', 
+                    url: 'https://en.wikipedia.org/wiki/Bombay_cat' 
+                  },
+                  britishShorthair = { 
+                    name: 'British Shorthair', 
+                    url: 'https://en.wikipedia.org/wiki/British_Shorthair' 
+                  },
+                  burmese = { 
+                    name: 'Burmese', 
+                    url: 'https://en.wikipedia.org/wiki/Burmese_cat' 
+                  },
+                  burmilla = { 
+                    name: 'Burmilla', 
+                    url: 'https://en.wikipedia.org/wiki/Burmilla' 
+                  },
+                  chartreux = { 
+                    name: 'Chartreux', 
+                    url: 'https://en.wikipedia.org/wiki/Chartreux' 
+                  },
+                  chineseLiHua = { 
+                    name: 'Chinese Li Hua', 
+                    url: 'https://en.wikipedia.org/wiki/Dragon_Li' 
+                  },
+                  colorpointShorthair = { 
+                    name: 'Colorpoint Shorthair', 
+                    url: 'https://en.wikipedia.org/wiki/Colorpoint_Shorthair' 
+                  },
+                  cornishRex = { 
+                    name: 'Cornish Rex', 
+                    url: 'https://en.wikipedia.org/wiki/Cornish_Rex' 
+                  },
+                  cymric = { 
+                    name: 'Cymric', 
+                    url: 'https://en.wikipedia.org/wiki/Cymric_cat' 
+                  },
+                  devonRex = { 
+                    name: 'Devon Rex', 
+                    url: 'https://en.wikipedia.org/wiki/Devon_Rex' 
+                  },
+                  egyptianMau = { 
+                    name: 'Egyptian Mau', 
+                    url: 'https://en.wikipedia.org/wiki/Egyptian_Mau' 
+                  },
+                  europeanBurmese = { 
+                    name: 'European Burmese', 
+                    url: 'https://en.wikipedia.org/wiki/Burmese_cat' 
+                  },
+                  havanaBrown = { 
+                    name: 'Havana Brown', 
+                    url: 'https://en.wikipedia.org/wiki/Havana_Brown' 
+                  },
+                  himalayan = { 
+                    name: 'Himalayan', 
+                    url: 'https://en.wikipedia.org/wiki/Himalayan_cat' 
+                  },
+                  japaneseBobtail = { 
+                    name: 'Japanese Bobtail', 
+                    url: 'https://en.wikipedia.org/wiki/Japanese_Bobtail' 
+                  },
+                  javanese = { 
+                    name: 'Javanese', 
+                    url: 'https://en.wikipedia.org/wiki/Javanese_cat' 
+                  },
+                  korat = { 
+                    name: 'Korat', 
+                    url: 'https://en.wikipedia.org/wiki/Korat' 
+                  },
+                  laPerm = { 
+                    name: 'LaPerm', 
+                    url: 'https://en.wikipedia.org/wiki/LaPerm' 
+                  },
+                  maineCoon = { 
+                    name: 'Maine Coon', 
+                    url: 'https://en.wikipedia.org/wiki/Maine_Coon' 
+                  },
+                  manx = { 
+                    name: 'Manx', 
+                    url: 'https://en.wikipedia.org/wiki/Manx_cat' 
+                  },
+                  nebelung = { 
+                    name: 'Nebelung', 
+                    url: 'https://en.wikipedia.org/wiki/Nebelung' 
+                  },
+                  norwegianForest = { 
+                    name: 'Norwegian Forest', 
+                    url: 'https://en.wikipedia.org/wiki/Norwegian_Forest_cat' 
+                  },
+                  nyan = { 
+                    name: 'Nyan Cat', 
+                    url: 'https://www.youtube.com/watch?v=QH2-TGUlwu4' 
+                  },
+                  ocicat = { 
+                    name: 'Ocicat', 
+                    url: 'https://en.wikipedia.org/wiki/Ocicat' 
+                  },
+                  persian = { 
+                    name: 'Persian', 
+                    url: 'https://en.wikipedia.org/wiki/Persian_cat' 
+                  },
+                  ragamuffin = { 
+                    name: 'Ragamuffin', 
+                    url: 'https://en.wikipedia.org/wiki/Ragamuffin_cat' 
+                  },
+                  ragdoll = { 
+                    name: 'Ragdoll', 
+                    url: 'https://en.wikipedia.org/wiki/Ragdoll' 
+                  },
+                  russianBlue = { 
+                    name: 'Russian Blue', 
+                    url: 'https://en.wikipedia.org/wiki/Russian_Blue' 
+                  },
+                  savannah = { 
+                    name: 'Savannah', 
+                    url: 'https://en.wikipedia.org/wiki/Savannah_cat' 
+                  },
+                  scottishFold = { 
+                    name: 'Scottish Fold', 
+                    url: 'https://en.wikipedia.org/wiki/Scottish_Fold' 
+                  },
+                  selkirkRex = { 
+                    name: 'Selkirk Rex', 
+                    url: 'https://en.wikipedia.org/wiki/Selkirk_Rex' 
+                  },
+                  siamese = { 
+                    name: 'Siamese', 
+                    url: 'https://en.wikipedia.org/wiki/Siamese_cat' 
+                  },
+                  siberian = { 
+                    name: 'Siberian', 
+                    url: 'https://en.wikipedia.org/wiki/Siberian_cat' 
+                  },
+                  singapura = { 
+                    name: 'Singapura', 
+                    url: 'https://en.wikipedia.org/wiki/Singapura_cat' 
+                  },
+                  snowshoe = { 
+                    name: 'Snowshoe', 
+                    url: 'https://en.wikipedia.org/wiki/Snowshoe_cat' 
+                  },
+                  somali = { 
+                    name: 'Somali', 
+                    url: 'https://en.wikipedia.org/wiki/Somali_cat' 
+                  },
+                  sphynx = { 
+                    name: 'Sphynx', 
+                    url: 'https://en.wikipedia.org/wiki/Sphynx_cat' 
+                  },
+                  tonkinese = { 
+                    name: 'Tonkinese', 
+                    url: 'https://en.wikipedia.org/wiki/Tonkinese_cat' 
+                  },
+                  turkishAngora = { 
+                    name: 'Turkish Angora', 
+                    url: 'https://en.wikipedia.org/wiki/Turkish_Angora' 
+                  },
+                  turkishVan = { 
+                    name: 'Turkish Van', 
+                    url: 'https://en.wikipedia.org/wiki/Turkish_Van' 
+                  }];
 
 
 //---------- FUNCTION DEFINITIONS ----------//
@@ -124,8 +265,6 @@ function initialize(obj) {
   obj.hiddenWord = obj.getHiddenWord();
   currentWordPara.innerHTML = obj.displayHiddenWord();
 }
-
-//---------- END FUNCTION DEFINITIONS ----------//
 
 
 //---------- GAME OBJECT DEFINITION ----------//
@@ -232,7 +371,6 @@ var game = {
   }
 };
 
-//---------- END GAME OBJECT DEFINITION ----------//
 
 //---------- RUN GAME ----------//
 
